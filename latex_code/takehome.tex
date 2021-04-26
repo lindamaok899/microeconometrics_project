@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper,leqno]{article}
+\usepackage{a4wide}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{lmodern,textcomp}
+\usepackage{float, afterpage, rotating, graphicx}
+\usepackage{longtable, booktabs, tabularx}
+\usepackage{verbatim}
+\usepackage{eurosym, calc, chngcntr}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, bm, delarray} 
+\usepackage{caption}
+\usepackage{datetime}
+\usepackage{tkz-graph}
+\usepackage{enumitem}
+\usepackage[multiple]{footmisc}
+\usepackage{multirow}
+\usepackage{pdfpages}
+\usetikzlibrary{arrows,positioning,snakes,shapes,shapes.multipart,patterns,mindmap,shadows}
+\usepackage{natbib}
+\usepackage{subcaption}
+\bibliographystyle{chicago}
+
+
+\usepackage[tikz]{bclogo}
+
+\usepackage[framemethod=tikz]{mdframed}
+\mdfdefinestyle{mystyle}{%
+	rightline=true,
+	innerleftmargin=10,
+	innerrightmargin=10,
+	outerlinewidth=3pt,
+	topline=false,
+	rightline=true,
+	bottomline=false,
+	skipabove=\topsep,
+	skipbelow=\topsep
+}
+
+\begin{document}
+ \begin{center}
+	\begin{LARGE}
+		\textbf{
+			ASP Course on Microeconometric Methods (2021)\\
+			 - Take Home Assignment -\\
+		}
+	\end{LARGE}
+	\vspace{0.2cm}
+	{\large \textbf{Project A}} \\\vspace{0.2cm}
+	{\large \textbf{Susann Adloff, Linda Maokomatanda, Saskia Meuchelböck}} \vspace{0.2cm}
+\end{center}
+
+\section*{Section 1}
+\textit{Provide a brief and selective literature review (maximum five papers) of studies looking at the relationship between FDI and firm level performance- focusing on econometric methodology issue.}\\ \vspace{0.2cm}
+
+\noindent \textbf{Wenjie Chen (2010): \textit{The effect of investor origin on firm performance: Domestic and foreign direct
+investment in the United States}}\\
+
+This paper studies the role of the origin of FDIs on target firm performance changes. It uses data on acquisitions of U.S firms between 1979 and 2006, comparing firm level performance indicators before and after acquisition, focusing on the difference between firms acquired by domestic firms (USFs), firms from industrialized countries (ICFs) and firms from developing countries (DCFs). The identification strategy is based on a diff-in-diff analysis which gives rise to a twofold selection problem. The empirical set up defines a control group which is domestically acquired firms and two treatment groups. As trans-boundary firm acquisition is more challenging than domestic acquisitions (Helpman et al 2004), firms that engage in the former are likely to be different from those that invest domestically, which might translate into "more skillful" target firm selection on part of foreign acquirers. Hence, the firms chosen for foreign investments are likely to structurally differ pre-treatment from those firms that are chosen for domestic acquisitions. Secondly, selection criteria for target firms might also differ based on the origin of the acquiring firm. The author argues that systematic differences can be expected in the aimed at restructuring process depending on the origin of the acquirer, due to structural differences between these groups in technological progress and relative input costs between target and acquirer. Consequently, selection bias might be found in the comparison of control and the treatment groups, as well as in the comparison of the two treatment groups. To solve this issue the author implements a propoensity score matching procedure. The scoring is achieved through a multinomial logit model estimation of observables available to acquires before the acquisition that provide information on present and potential future target firm performance, as well as year, industry and state fixed effects. The matching is done using a kernel matching procedure. This step allows to impose pre-treatment homogeneity in firm performance across comparison groups and thus to interpret any difference in performance between matched pairs to result from the difference in treatment. The results of this estimation show that firms acquired by ICFs show 13 percentage points higher improvements in terms of labour productivity, a 10 percentage point higher profit increase and a 19\% higher increase in sales in the five years post acquisition relative to the year before the acquisition, compared to firms acquired by USFs. Between those two groups no difference in overall employment changes was found. For firms acquired by DCFs the author finds that labour productivity gains and changes in sales and employment are lower than those of domestic acquisitions, albeit higher profit gains. Comparing firm-level effects of FDIs originating from industrialized countries to those from developing countries, gains in sales, labour productivity and employment are significantly higher for target firms acquired by ICFs.
+
+\section*{Section 2}
+\textit{Provide a discussion of the most important features of the data; describe any interesting patterns or correlations in the data and provide some summary statistics/graphs of the variables of interest. If you have performed any data cleaning exercises (e.g. you have excluded some observations) or carried out any data transformations (e.g. “unlogging” the wage variables).}
+
+\section*{Section 3}
+\textit{Explain very briefly your econometric approach to evaluate the casual effects of FDI on the outcome variables of choice (you can assume that the readers know the basic principles of propensity score-based estimators). You are encouraged to estimate more than one model and probe the sensitivity of your findings to alternative model specifications. Write a report on your main findings, indicating which of the estimators, if any, you would you prefer most in the context of this exercise, and why?}
+
+\section*{Section 4}
+\textit{Try to answer the question whether your conclusions from Section 3 change if you re-estimate the casual effects of FDI by type of FDI? You are encouraged to consider alternative models to estimate the propensity scores, as well as experiment with different estimators.}
+
+\section*{Section 5} 
+\textit{This is a summary and conclusion section where you should give an overall evaluation of your work including possible shortcomings.}
+
+\nocite{chen2011}
+\clearpage
+\bibliography{asp_micromeths.bib}
+
+
+\appendix
+\section*{Appendix}
+The output from Stata and the code you used in your study.
+
+\end{document}
