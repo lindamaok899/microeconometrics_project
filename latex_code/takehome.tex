@@ -60,11 +60,32 @@ This paper studies the role of the origin of FDIs on target firm performance cha
 \section*{Section 2}
 \textit{Provide a discussion of the most important features of the data; describe any interesting patterns or correlations in the data and provide some summary statistics/graphs of the variables of interest. If you have performed any data cleaning exercises (e.g. you have excluded some observations) or carried out any data transformations (e.g. “unlogging” the wage variables).}
 
+\begin{itemize}
+	\item 11.323 observations of firms --> what kind of firms (describe in terms of own, tech and port)
+	\item treatment in 2016, 3 kinds of fdi type --> how many did receive (which) treatment
+
+\end{itemize}
+
 \section*{Section 3}
 \textit{Explain very briefly your econometric approach to evaluate the casual effects of FDI on the outcome variables of choice (you can assume that the readers know the basic principles of propensity score-based estimators). You are encouraged to estimate more than one model and probe the sensitivity of your findings to alternative model specifications. Write a report on your main findings, indicating which of the estimators, if any, you would you prefer most in the context of this exercise, and why?}
 
+\begin{itemize}
+	\item selection into treatment (likely) non-random, firms receiving FDIs likely chosen based on their (observable!) pre-treatment performance, which is thus correlated with treatment assignment as well as with post-treatment performance, by definition. 
+	\item compare balancedness of *2015 vars across treatment conditions.  --> check for which/how many variables are unbalanced.
+	--> violation of CIA and curse of dimensionality  
+	\item compute propensity score measure using logit function/ probit function or varying the matching algorithm (nearest neighbour, kernel, caliper, inverse weighted...)
+	\item check for common support condition
+	\item compute ATE. Outcome variables of interest: 
+\end{itemize}
+
 \section*{Section 4}
 \textit{Try to answer the question whether your conclusions from Section 3 change if you re-estimate the casual effects of FDI by type of FDI? You are encouraged to consider alternative models to estimate the propensity scores, as well as experiment with different estimators.}
+
+\begin{itemize}
+	\item effects of FDI on firm performance likely varying by FDI type, also firm selection criteria are likely to differ between FDI types. 
+	\item redo by using multinomial logit model for propensity score matching
+	\item check 
+\end{itemize}
 
 \section*{Section 5} 
 \textit{This is a summary and conclusion section where you should give an overall evaluation of your work including possible shortcomings.}
