@@ -57,38 +57,126 @@ investment in the United States}}\\
 
 This paper studies the role of the origin of FDIs on target firm performance changes. It uses data on acquisitions of U.S firms between 1979 and 2006, comparing firm level performance indicators before and after acquisition, focusing on the difference between firms acquired by domestic firms (USFs), firms from industrialized countries (ICFs) and firms from developing countries (DCFs). The identification strategy is based on a diff-in-diff analysis which gives rise to a twofold selection problem. The empirical set up defines a control group which is domestically acquired firms and two treatment groups. As trans-boundary firm acquisition is more challenging than domestic acquisitions (Helpman et al 2004), firms that engage in the former are likely to be different from those that invest domestically, which might translate into "more skillful" target firm selection on part of foreign acquirers. Hence, the firms chosen for foreign investments are likely to structurally differ pre-treatment from those firms that are chosen for domestic acquisitions. Secondly, selection criteria for target firms might also differ based on the origin of the acquiring firm. The author argues that systematic differences can be expected in the aimed at restructuring process depending on the origin of the acquirer, due to structural differences between these groups in technological progress and relative input costs between target and acquirer. Consequently, selection bias might be found in the comparison of control and the treatment groups, as well as in the comparison of the two treatment groups. To solve this issue the author implements a propoensity score matching procedure. The scoring is achieved through a multinomial logit model estimation of observables available to acquires before the acquisition that provide information on present and potential future target firm performance, as well as year, industry and state fixed effects. The matching is done using a kernel matching procedure. This step allows to impose pre-treatment homogeneity in firm performance across comparison groups and thus to interpret any difference in performance between matched pairs to result from the difference in treatment. The results of this estimation show that firms acquired by ICFs show 13 percentage points higher improvements in terms of labour productivity, a 10 percentage point higher profit increase and a 19\% higher increase in sales in the five years post acquisition relative to the year before the acquisition, compared to firms acquired by USFs. Between those two groups no difference in overall employment changes was found. For firms acquired by DCFs the author finds that labour productivity gains and changes in sales and employment are lower than those of domestic acquisitions, albeit higher profit gains. Comparing firm-level effects of FDIs originating from industrialized countries to those from developing countries, gains in sales, labour productivity and employment are significantly higher for target firms acquired by ICFs.
 
-\section*{Section 2}
+\section*{Section 2} (Saskia)
 \textit{Provide a discussion of the most important features of the data; describe any interesting patterns or correlations in the data and provide some summary statistics/graphs of the variables of interest. If you have performed any data cleaning exercises (e.g. you have excluded some observations) or carried out any data transformations (e.g. “unlogging” the wage variables).}
 
 \begin{itemize}
-	\item 11.323 observations of firms --> what kind of firms (describe in terms of own, tech and port)
-	\item treatment in 2016, 3 kinds of fdi type --> how many did receive (which) treatment
+	\item full sample description:
+	\begin{itemize}
+		\item dataset on firm level performance indicators for the years 2015 and 2017 for 11.323 firms  
+		\item roughly one third each low tech and medium high tech industries, and one sixth each medium low tech and high tech industries
+		\item 40\% independent firms, 30\% state owned firms, roughly 20\% subsidiaries and a minority of 8\% listed companies.  
+	\end{itemize}
+	\item treatment var: FDI received in 2016 yes or no and which type of FDI
+	\begin{itemize}
+		\item 39\% of firms in the dataset did receive FDIs
+		\item 8\% of all firms in the dataset received export oriented FDIs, 14\% technology intensive FDIs and 17\% domestic market seeking ones
+	\end{itemize}
 
+		%\textit{interesting patterns or correlations?!?!?}
 \end{itemize}
 
-\section*{Section 3}
+\section*{Section 3} (Susann)
 \textit{Explain very briefly your econometric approach to evaluate the casual effects of FDI on the outcome variables of choice (you can assume that the readers know the basic principles of propensity score-based estimators). You are encouraged to estimate more than one model and probe the sensitivity of your findings to alternative model specifications. Write a report on your main findings, indicating which of the estimators, if any, you would you prefer most in the context of this exercise, and why?}
 
 \begin{itemize}
 	\item selection into treatment (likely) non-random, firms receiving FDIs likely chosen based on their (observable!) pre-treatment performance, which is thus correlated with treatment assignment as well as with post-treatment performance, by definition. 
 	\item compare balancedness of *2015 vars across treatment conditions.  --> check for which/how many variables are unbalanced.
-	--> violation of CIA and curse of dimensionality  
-	\item compute propensity score measure using logit function/ probit function or varying the matching algorithm (nearest neighbour, kernel, caliper, inverse weighted...)
-	\item check for common support condition
-	\item compute ATE. Outcome variables of interest: 
+	\item regression output
+	\begin{itemite}
+		\item unbalanced in wages, TFP, employment, export intensity and debt. R\&D are not too different between treated and untreated
+		\item unbalanced in terms of firm kinds as well
+		\item $\rightarrow$ violation of CIA and curse of dimensionality  
+	\end{itemite}
+
+	\item compute propensity score measure using logit function/ probit function or varying the matching algorithm (number of neighbours, caliper), check for common support condition, compute ATE. Outcome variables of interest: employment and wages
+	\item goal in this process is to achieve a propensity score measure that achieves balancedness in terms of relevant observables, on one hand and a good treatment overlap on the other. This is not trivial. Imagine a situation in which treatment is assigned according to one specific set of variables being high. If matching is performed based on this variable set then propensity scores will be high for firms with high values along this set of variables and matching of firms with similar propensity scores will produce very little differences in variables. Yet, this will produce a most certainly bad overlap. Opposed to that using a variable that is not related to treatment assignment for the propensity score matching will produce a high overlap as propensity scores calculated based on a unrelated variable will be similarly distributed within treatment and non-treatment groups, but it will be unlikely that this matching procedure will be able to balance the previously unbalanced variables. Consequently, a scoring function specification has to be found that involves all variables relevant for treatment assignment but in a way that produces high overlap.
+	\begin{itemize}
+		\item mostly all 2015 observables show relevance for treatment assignment. 
+		\item only including a subset of the relevant 2015 observables in the scoring function achieves the opposite: Improvements in overlap but non-convincing balancedness levels. (compare output d, e, f) argue 
+		\item experimenting with linear and interacted (continous vars with categorial/binary vars) functional specifications, logit and probit estimations, different number of neighbors and varying caliper levels leads to improvements in balance but is insufficient to produce a convincing overlap to proceed with the propensity scoring approach at effects estimation. (compare output a, b, c)
+		
+		\item Finally we found a specification that seems to balance across those two goals in the matching procedure. This specification makes use of a categorial export variable (..descrribe how.. taking out some info but not all info) such that it can be used as a type describing variable instead of as part of the continuous variables.  
+	\end{itemize}
+	\item \textbf{Employment effects:} ATE of 0.79
+	\item \textbf{Wage effects:} ATE of 0.75
+	
+	\begin{comment}
+		%" check for balancedness balancedness improved a lot when using the interacted version")
+		\item try 1: matching with 2 nearest neighbors using a logit scoring function
+		\begin{itemize}
+			\item unbalanced in log employment, medium low and medium high tech industries, independently and state owned firms and those with close ports.. 
+			\item overlap quite bad. majority of FDI=0 on left, majority of FDI=1 on right
+		\end{itemize}
+		\item try 2: matching with 4 nearest neighbors using a logit scoring function and caliper 0.10
+		\begin{itemize}
+			\item unbalanced in log employment, export intensity, debts and those with close ports.. 
+			\item overlap quite bad. majority of FDI=0 on left, majority of FDI=1 on right
+		\end{itemize}
+		\item try 3: matching with 2 nearest neighbors using a probit scoring function
+		\begin{itemize}
+			\item unbalanced in TFP, log employment, medium low tech industry firms and independent and state owned firms and those with close ports.. 
+			\item overlap quite bad. majority of FDI=0 on left, majority of FDI=1 on right
+		\end{itemize}
+		\item try 4: matching with 4 nearest neighbours caliper of 0.1, a logit scoring function including interaction effects
+		\begin{itemize}
+			\item no imbalances with matched differences larger than 0.20
+			\item overlap unchanged
+			\item ATE 0.745 (p-value 0.023)
+		\end{itemize}
+	\end{comment}
+
+--> using the models with best balancing still show bad overlap. This means that propensity scoring is difficult to apply to this data. Doubly robust can work with misspecified scoring functions use doubly robust accept some imbalance. 
+	
+	\underline{Wage Effects}
+	\begin{itemize}
+		\item matching process will be the same as before if same variables used, thus use last condition including interaction effects
+		\item ATE 0.654 (p-value 0.046)
+		\item looking at figure 6 it can be seen that overall drop in wages from 2015 to 2017, which were however much lower treated firms.
+	\end{itemize}
+	
+	
 \end{itemize}
 
-\section*{Section 4}
+\section*{Section 4} (Linda)
 \textit{Try to answer the question whether your conclusions from Section 3 change if you re-estimate the casual effects of FDI by type of FDI? You are encouraged to consider alternative models to estimate the propensity scores, as well as experiment with different estimators.}
 
 \begin{itemize}
-	\item effects of FDI on firm performance likely varying by FDI type, also firm selection criteria are likely to differ between FDI types. 
-	\item redo by using multinomial logit model for propensity score matching
+	\item effects of FDI on firm performance likely varying by FDI type as FDIs differ by the kind of restructuring goals they formulate, i.e. export or domestic market oriented, thus they are likely affect different outcome variables differently
+	\item also firm selection criteria are likely to differ between FDI types, given these different restructuring goals 
+	\begin{itemize}
+		\item for example significant differences in RD in 2015 of firms target for export oriented, technology intensive and domestic market oriented FDIs
+		\item (Types quite balanced)
+	\end{itemize}
+	\item redo by using multinomial logit model for propensity score matching and doubly robust propensity score estimator (task 5 of computer class 2)
+	
+	\underline{Employment Effects}
+	\begin{itemize}
+		\item try 1: logit scoring function, no interactions
+		\begin{itemize}
+			\item imbalances in high tech industries, exports and a bit in employment
+			\item ATE 0.29/0.30 for all FDI types. how can that be?!
+		\end{itemize}
+		\item try 2: logit scoring function, interactions 
+		\begin{itemize}
+			\item --> ERROR for balancing table
+			\item ATE roughly the same slightly more spread around 0.30
+		\end{itemize}	 
+	\end{itemize}
+
+	\underline{Wage Effects}
+	\begin{itemize}
+		\item try 1: no interactions --> ATE: 0.23 for all
+		\item try 2: interactions --> ATE: 0.23 more spread out
+	\end{itemize}
 	\item check 
 \end{itemize}
 
 \section*{Section 5} 
 \textit{This is a summary and conclusion section where you should give an overall evaluation of your work including possible shortcomings.}
+\begin{itemize}
+	\item severe shortcoming: overlap bad if we include all variables relevant in the logit specification, dropping variables  
+\end{itemize}
 
 \nocite{chen2011}
 \clearpage
