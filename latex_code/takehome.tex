@@ -50,18 +50,13 @@
 \end{center}
 
 \section*{Section 1}
-We review three papers that provide a seamless synergy into our project that estimates the impact of foreign direct investment on firm performance by taking a wholistic approach to the literature. We first take a look at a paper by \cite{borin2016foreign} which displays the effects on firm performance in the firm’s country of origin when they decide to invest abroad, thus becoming a multi-national enterprise. In an intermediate stage, we review a paper by Bajgar and Javorcik (2020)  that investigates analyze spillover effects from FDI on domestic firm performance resulting from links along the supply chain. To conclude our review and introduce section 2, we review \cite{chen2011} studies the role of the origin of FDIs on target firm performance changes.
+We review three papers that provide a seamless synergy into our project that estimates the impact of foreign direct investment on firm performance by taking a holistic approach to the literature. We first take a look at a paper by \cite{borin2016foreign} which displays the effects on firm performance in the firm’s country of origin when they decide to invest abroad, thus becoming a multi-national enterprise. In an intermediate stage, we review a paper by Bajgar and Javorcik (2020)  that investigates analyze spillover effects from FDI on domestic firm performance resulting from links along the supply chain. To conclude our review and introduce section 2, we review \cite{chen2011} studies the role of the origin of FDIs on target firm performance changes.
 
 \cite{borin2016foreign} investigate the ex-post effects of foreign direct investment (FDI) on firm performance using data from the Bank of Italy’s annual Survey of Industrial and Service Firms (the Invind survey) as well as balance sheet data from the Company Accounts Data Service (henceforth CADS).  They extend the discussion from empirical and theoretical literature that shows how multinational firms (MNE) exhibit a competitive advantage before investing abroad, by conducting microeconomic data analysis to evaluate the policy implications of firm heterogeneity. The authors specify the best-case scenario to be the implementation of policy measures and internationalization strategies that are capable of enhancing both firm performance and employment. The ex-ante causal relationship (from performance to internationalization) in \cite{borin2016foreign}’s paper introduces a severe form of endogeneity, in that ex-post performance might reflect not only foreign investment, but also pre-existent advantages in terms of managerial ability, know-how and technology. To accurately evaluate the ex-post effects of FDI that take into account the inherent self-selection problem, the authors use a propensity score matching procedure to analyze the causal relationship between firm performance and foreign direct investment, looking in particular at the potential gains in terms of productivity and potential losses in terms of employment in the parent firm due to the acquisition of multinational status; as well as to evaluate whether these effects are evenly spread across new MNEs or concentrated among certain groups of investors. To implement the propensity matching estimation, the authors choose a company, ex-ante very similar to the first one, but that does not choose to invest abroad to act as a proxy of the unobservable counterfactual, enabling them to compare the evolution of new MNEs with the performance of the exact same company with no investment; since it is not possible to observe the same company in these two different scenarios. They find that firms investing abroad for the very first time, especially in advanced economies, show higher productivity and employment dynamics in the years following the investment: the average positive effect on TFP is driven by new multinationals operating in specialized and high-tech sectors, while the positive employment gains are explained by an increase of the white collar component. On average, the authors do not find a negative effects on the parent firm's blue collar component.
 
 \cite{bajgar2020climbing} analyze spillover effects from FDI on domestic firm performance resulting from links along the supply chain. More specifically, they investigate the relationship between quality upgrading by Romanian exporters and the presence of foreign affiliates in upstream and downstream industries, respectively. They use customs data merged with firm-level data for the years 2005 to 2011 and find a positive and robust link between the product quality of domestic exporters – proxied by two measures established in the literature, namely unit values and a measure proposed by \cite{khandelwal2013trade} – and the presence of foreign-owned firms in upstream (i.e. input-supplying) industries. The results indicate that a one percentage point increase in FDI presence upstream is related to a roughly 0.5\% increase in product quality of domestic exporters, on average and ceteris paribus. The positive relationship between export quality and the presence of foreign-owned firms in downstream industries is less robust. To estimate these effects, the authors employ OLS regressions with product quality as the dependent variable and a measure of FDI presence in upstream and downstream industries, respectively, as the main independent variable of interest. They control for firm-product-destination fixed effects, region-time fixed effects and linear time trends at the region-industry level. However, the authors acknowledge that reverse causality could be a problem, for example if foreign firms primarily invest in industries where high-quality domestic inputs become increasingly available, and these developments are not captured by the linear time trends. To mitigate these concerns, they lag their FDI variables by one year in all specifications. In addition, they perform a “strict exogeneity” test suggested by \cite{wooldridge2010econometric}, including also contemporaneous and lead FDI values into their model. They argue that if foreign firms enter Romania as a consequence of quality upgrading rather than the other way around, the coefficients on the lead values of FDI should also be statistically significant, which is not the case. They conclude that the increase in foreign presence in the upstream industries over the studied period corresponded to a circa 4\% increase in the quality of exports by local firms.
 
-\cite{chen2011} studies the role of the origin of FDIs on target firm performance changes.
-It uses data on acquisitions of U.S firms between 1979 and 2006, comparing firm level performance indicators before and after acquisition, focusing on the difference between firms acquired by domestic firms (USFs), firms from industrialized countries (ICFs) and firms from developing countries (DCFs). The identification strategy is based on a diff-in-diff analysis which gives rise to a twofold selection problem. The empirical set up defines a control group which is domestically acquired firms and two treatment groups. As trans-boundary firm acquisition is more challenging than domestic acquisitions (Helpman et al 2004), firms that engage in the former are likely to be different from those that invest domestically, which might translate into "more skillful" target firm selection on part of foreign acquirers. Hence, the firms chosen for foreign investments are likely to structurally differ pre-treatment from those firms that are chosen for domestic acquisitions. Secondly, selection criteria for target firms might also differ based on the origin of the acquiring firm. The author argues that systematic differences can be expected in the aimed at restructuring process depending on the origin of the acquirer, due to structural differences between these groups in technological progress and relative input costs between target and acquirer. Consequently, selection bias might be found in the comparison of control and the treatment groups, as well as in the comparison of the two treatment groups. To solve this issue the author implements a propoensity score matching procedure. The scoring is achieved through a multinomial logit model estimation
-of observables available to acquires before the acquisition that provide information on present and potential future target firm performance, as well as year, industry and state
-fixed effects. The matching is done using a kernel matching procedure. This step allows to
-impose pre-treatment homogeneity in firm performance across comparison groups and thus to
-interpret any difference in performance between matched pairs to result from the difference in treatment. The results of this estimation show that firms acquired by ICFs show 13\% higher improvements in terms of labour productivity, a 10\% higher profit increase and a 19\% higher increase in sales in the five years post acquisition relative to the year before the acquisition, compared to firms acquired by USFs. Between those two groups no difference in overall employment changes was found. For firms acquired by DCFs the author finds that labour productivity gains and changes in sales and employment are 1\% lower than those of domestic acquisitions, albeit higher profit gains. Comparing firm-level effects of FDIs originating from industrialized countries to those from developing countries, gains in sales, labour productivity and employment are significantly higher for target firms acquired by ICFs.
+\cite{chen2011} studies the role of the origin of FDIs on target firm performance changes. It uses data on acquisitions of U.S firms between 1979 and 2006, comparing firm level performance indicators before and after acquisition, focusing on the difference between firms acquired by domestic firms (USFs), firms from industrialized countries (ICFs) and firms from developing countries (DCFs). The identification strategy is based on a diff-in-diff analysis which gives rise to a twofold selection problem. The empirical set up defines a control group which is domestically acquired firms and two treatment groups. As trans-boundary firm acquisition is more challenging than domestic acquisitions (Helpman et al 2004), firms that engage in the former are likely to be different from those that invest domestically, which might translate into "more skillful" target firm selection on part of foreign acquirers. Hence, the firms chosen for foreign investments are likely to structurally differ pre-treatment from those firms that are chosen for domestic acquisitions. Secondly, selection criteria for target firms might also differ based on the origin of the acquiring firm. The author argues that systematic differences can be expected in the aimed at restructuring process depending on the origin of the acquirer, due to structural differences between these groups in technological progress and relative input costs between target and acquirer. Consequently, selection bias might be found in the comparison of control and the treatment groups, as well as in the comparison of the two treatment groups. To solve this issue the author implements a propensity score matching procedure. The scoring is achieved through a multinomial logit model estimation of observables available to acquires before the acquisition that provide information on present and potential future target firm performance, as well as year, industry and state fixed effects. The matching is done using a kernel matching procedure. This step allows to impose pre-treatment homogeneity in firm performance across comparison groups and thus to interpret any difference in performance between matched pairs to result from the difference in treatment. The results of this estimation show that firms acquired by ICFs show 13\% higher improvements in terms of labour productivity, a 10\% higher profit increase and a 19\% higher increase in sales in the five years post acquisition relative to the year before the acquisition, compared to firms acquired by USFs. Between those two groups no difference in overall employment changes was found. For firms acquired by DCFs the author finds that labour productivity gains and changes in sales and employment are 1\% lower than those of domestic acquisitions, albeit higher profit gains. Comparing firm-level effects of FDIs originating from industrialized countries to those from developing countries, gains in sales, labour productivity and employment are significantly higher for target firms acquired by ICFs.
 
 In Section $2$, we will provide a discussion of the most important features of the data we will be working with, including some interesting patterns and correlations that we have discovered in the data. We also provide some summary statistics and graphs of the variables of interest.
 
@@ -87,67 +82,69 @@ In Section $2$, we will provide a discussion of the most important features of t
 \section*{Section 3} (Susann)
 \textit{Explain very briefly your econometric approach to evaluate the casual effects of FDI on the outcome variables of choice (you can assume that the readers know the basic principles of propensity score-based estimators). You are encouraged to estimate more than one model and probe the sensitivity of your findings to alternative model specifications. Write a report on your main findings, indicating which of the estimators, if any, you would you prefer most in the context of this exercise, and why?}
 
-\begin{itemize}
-	\item selection into treatment (likely) non-random, firms receiving FDIs likely chosen based on their (observable!) pre-treatment performance, which is thus correlated with treatment assignment as well as with post-treatment performance, by definition. 
-	\item compare balancedness of *2015 vars across treatment conditions.  --> check for which/how many variables are unbalanced.
-	\item regression output
-	\begin{itemite}
-		\item unbalanced in wages, TFP, employment, export intensity and debt. R\&D are not too different between treated and untreated
-		\item unbalanced in terms of firm kinds as well
-		\item $\rightarrow$ violation of CIA and curse of dimensionality  
-	\end{itemite}
+The challenge that this dataset poses for the identification of causal effects of FDI, is that the treatment (FDI) is not assigned randomly across firms but the result of a selection process. Investors will carefully decide which firms to invest in using observable firm-level performance indicators before investing. Thus, treatment allocation will likely depend on observable firm characteristics in 2015, such that firms in the treatment group will structurally differ from firms in the untreated group. Table \ref{balance_check} shows that in the available dataset this imbalance in pre-treatment characteristics between treated and non-treated firms can be found across all available performance indicators from 2015. In addition, table \ref{selection_logit} presents the result of a logit regression of FDI on pre-treatment characteristics, which corroborates the statistical significance of correlations with FDI assignment for all available pre-treatment variables expect log wages. The set of pre-treatment firm characteristics is, consequently, correlated with post-treatment performance as well as with treatment allocation, which violates the conditional independence assumption, necessary for causal identification. As this violation is found across multiple variables, the data suffers from what is called \textit{the curse of dimensionality}. This can be circumvented by propensity score matching such that causal identification of FDI effects on firm performance can still be achieved. In particular, we will investigate the impact of FDIs on firm employment and wages.\\ \par 
 
-	\item compute propensity score measure using logit function/ probit function or varying the matching algorithm (number of neighbours, caliper), check for common support condition, compute ATE. Outcome variables of interest: employment and wages
-	\item goal in this process is to achieve a propensity score measure that achieves balancedness in terms of relevant observables, on one hand and a good treatment overlap on the other. This is not trivial. Imagine a situation in which treatment is assigned according to one specific set of variables being high. If matching is performed based on this variable set then propensity scores will be high for firms with high values along this set of variables and matching of firms with similar propensity scores will produce very little differences in variables. Yet, this will produce a most certainly bad overlap. Opposed to that using a variable that is not related to treatment assignment for the propensity score matching will produce a high overlap as propensity scores calculated based on a unrelated variable will be similarly distributed within treatment and non-treatment groups, but it will be unlikely that this matching procedure will be able to balance the previously unbalanced variables. Consequently, a scoring function specification has to be found that involves all variables relevant for treatment assignment but in a way that produces high overlap.
-	\begin{itemize}
-		\item mostly all 2015 observables show relevance for treatment assignment. 
-		\item only including a subset of the relevant 2015 observables in the scoring function achieves the opposite: Improvements in overlap but non-convincing balancedness levels. (compare output d, e, f) argue 
-		\item experimenting with linear and interacted (continous vars with categorial/binary vars) functional specifications, logit and probit estimations, different number of neighbors and varying caliper levels leads to improvements in balance but is insufficient to produce a convincing overlap to proceed with the propensity scoring approach at effects estimation. (compare output a, b, c)
-		
-		\item Finally we found a specification that seems to balance across those two goals in the matching procedure. This specification makes use of a categorial export variable (..descrribe how.. taking out some info but not all info) such that it can be used as a type describing variable instead of as part of the continuous variables.  
-	\end{itemize}
-	\item \textbf{Employment effects:} ATE of 0.79
-	\item \textbf{Wage effects:} ATE of 0.75
-	
-	\begin{comment}
-		%" check for balancedness balancedness improved a lot when using the interacted version")
-		\item try 1: matching with 2 nearest neighbors using a logit scoring function
-		\begin{itemize}
-			\item unbalanced in log employment, medium low and medium high tech industries, independently and state owned firms and those with close ports.. 
-			\item overlap quite bad. majority of FDI=0 on left, majority of FDI=1 on right
-		\end{itemize}
-		\item try 2: matching with 4 nearest neighbors using a logit scoring function and caliper 0.10
-		\begin{itemize}
-			\item unbalanced in log employment, export intensity, debts and those with close ports.. 
-			\item overlap quite bad. majority of FDI=0 on left, majority of FDI=1 on right
-		\end{itemize}
-		\item try 3: matching with 2 nearest neighbors using a probit scoring function
-		\begin{itemize}
-			\item unbalanced in TFP, log employment, medium low tech industry firms and independent and state owned firms and those with close ports.. 
-			\item overlap quite bad. majority of FDI=0 on left, majority of FDI=1 on right
-		\end{itemize}
-		\item try 4: matching with 4 nearest neighbours caliper of 0.1, a logit scoring function including interaction effects
-		\begin{itemize}
-			\item no imbalances with matched differences larger than 0.20
-			\item overlap unchanged
-			\item ATE 0.745 (p-value 0.023)
-		\end{itemize}
-	\end{comment}
+ \input{figures_and_tables/3_selection.tex}
 
---> using the models with best balancing still show bad overlap. This means that propensity scoring is difficult to apply to this data. Doubly robust can work with misspecified scoring functions use doubly robust accept some imbalance. 
-	
-	\underline{Wage Effects}
-	\begin{itemize}
-		\item matching process will be the same as before if same variables used, thus use last condition including interaction effects
-		\item ATE 0.654 (p-value 0.046)
-		\item looking at figure 6 it can be seen that overall drop in wages from 2015 to 2017, which were however much lower treated firms.
-	\end{itemize}
-	
-	
-\end{itemize}
+
+% check balancedness computationally, check significance of all variables
+ 
+ In order for propensity score matching to successfully alleviate any concerns of selection bias, a scoring function needs to be identified that achieves balancedness in terms of relevant observables, on one hand, and a good common support, i.e. overlap on the other. This is not trivial. Imagine a situation in which treatment is assigned according to one specific set of variables. Whenever values of this set of variables are high a subject receives treatment. If scoring is performed based on this variable set then propensity scores will be high for firms with high values along this set of variables and matching of firms with similar propensity scores will produce very little differences in values of these variables. Yet, this will produce a most certainly bad overlap. Opposed to that using a variable that is not related to treatment assignment for the propensity score matching will produce a high overlap as propensity scores calculated based on a unrelated variable will be similarly distributed within treatment and non-treatment groups, but it will be unlikely that this matching procedure will be able to balance the previously unbalanced variables. Consequently, a scoring function specification has to be found that balances all variables relevant for treatment assignment but in a way that produces high overlap. \\ \par 
+ 
+ In the dataset at hand all pre-treatment performance indicators showed relevance for selection, except for log wages, which however exhibits pre-treatment imbalance between groups. Figure \ref{ol_linlog1} shows the overlap and table \ref{bal_linlog1} the balancedness check results of a linear functional specification including all these variables in a logit scoring function. It can be seen that this functional specification is not suited to achieve sample balance in a 1 on 1 matching procedure and most importantly not providing sufficient overlap to identify an unbiased average treatment effect. Varying the functional specification in multiple ways (using probit instead of logit, interacting continuous performance indicators with categorical type determinants) does not produce any considerable improvements in overlap (compare figure \ref{ol_intlog1} and \ref{ol_intprob1} in the Appendix). If we reduce the number of variables used in the scoring function to a subset of the pre-treatment observables, we find improvements in overlap as is expected based on the above presented argument (compare e.g. figure \ref{ol_linlog1_red}). However, this comes at the cost of missing control over several variables that could be shown to significantly drive selection. In an attempt to reduce dimensionality of the information used in the scoring function while keeping control over all variables relevant for selection we opt for translating continuous performance indicators into less fine grained categorical variables. In particular, we construct a variable "EXP2015\_CAT" that assigns the values 0, 1 or 2 for firms that have an export intensity of 0, below 25\% or larger 25\% respectively. Using a scoring function in which the remaining continuous variables are interacted with the binary/ categorical variables including "EXP2015\_CAT" achieves strong improvements in overlap compared to the other specifications based on the full set of variables (see figure \ref{ol_intcatlog1}). In addition, we find acceptable balancedness levels in the one on one matching, with matched differences of close to or above 0.2 in only two cases (compare table 2). Testing various alternative matching specifications such as matching with the two or four nearest neighbours or using a caliper (compare tables \ref{bal_intcatlog2} and \ref{bal_intcatlog4} in the Appendix) shows that the best results seem indeed to be achieved in a one on one matching. Given this turnout, this specification is chosen for effects estimation.\\ \par
+
+\begin{table}
+	\centering
+\begin{tabular}{lcccc}
+	\input{figures_and_tables/3_balance_linearlogit1o1.tex}
+\end{tabular}
+	\caption{Balance check: linear logit 1 on 1}
+	\label{bal_linlog1}
+\end{table}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_linearlogit1o1.pdf}\
+	\caption{Overlap: linear logit 1 on 1 }
+	\label{ol_linlog1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_intcatlogit1o1.pdf}\
+	\caption{Overlap: interactions using exports as categorical instead of continuous variable logit 1 on 1 }
+	\label{ol_intcatlog1}
+\end{figure}
+
+\begin{table}
+	\centering
+	\begin{tabular}{lcccc}
+	\input{figures_and_tables/3_balance_intcatlogit1o1.tex}
+	\end{tabular}
+	\caption{Balance check: interactions using exports as categorical instead of continuous variable logit 1 on 1}
+	\label{bal_intcatlog1}
+\end{table}
+
+ Following this estimation approach, Table \ref{ates} shows the average marginal effects of FDI on firm performance with regard to employment and wages. The effect on log employment is 0.79. This translates into an increase in employment by 120\% from FDI one year after the investment took place. The average treatment effect for log wages is 0.75. In light of the overall negative trend in wage changes from 2015 to 2017, thus, wages of firms that did receive FDIs fell by 110\% less than wages of firms that did not receive any FDI.
+
+
+\input{figures_and_tables/3_ate.tex}
+
+\clearpage
 
 \section*{Section 4} (Linda)
 \textit{Try to answer the question whether your conclusions from Section 3 change if you re-estimate the casual effects of FDI by type of FDI? You are encouraged to consider alternative models to estimate the propensity scores, as well as experiment with different estimators.}
+
+
+--> using the models with best balancing still show bad overlap. This means that propensity scoring is difficult to apply to this data. Doubly robust can work with misspecified scoring functions use doubly robust accept some imbalance. 
+
+\underline{Wage Effects}
+\begin{itemize}
+	\item matching process will be the same as before if same variables used, thus use last condition including interaction effects
+	\item ATE 0.654 (p-value 0.046)
+	\item looking at figure 6 it can be seen that overall drop in wages from 2015 to 2017, which were however much lower treated firms.
+\end{itemize}
+
 
 \begin{itemize}
 	\item effects of FDI on firm performance likely varying by FDI type as FDIs differ by the kind of restructuring goals they formulate, i.e. export or domestic market oriented, thus they are likely affect different outcome variables differently
@@ -183,7 +180,8 @@ In Section $2$, we will provide a discussion of the most important features of t
 \section*{Section 5} 
 \textit{This is a summary and conclusion section where you should give an overall evaluation of your work including possible shortcomings.}
 \begin{itemize}
-	\item severe shortcoming: overlap bad if we include all variables relevant in the logit specification, dropping variables  
+	\item ate or atet? substantial amount of sample outside of overlapping area. 
+	\item doubly robust or nearest neighbour matching
 \end{itemize}
 
 \nocite{chen2011}
@@ -194,5 +192,42 @@ In Section $2$, we will provide a discussion of the most important features of t
 \appendix
 \section*{Appendix}
 The output from Stata and the code you used in your study.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_intlogit1o1.pdf}\
+	\caption{Overlap: int logit 1 on 1 }
+	\label{ol_intlog1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_intprobit1o1.pdf}\
+	\caption{Overlap: int probit 1 on 1 }
+	\label{ol_intprob1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_linearlogit1o1_reduced.pdf}\
+	\caption{Overlap: lin logit 1 on 1 reduced set (excl. cat/binary) }
+	\label{ol_linlog1_red}
+\end{figure}
+
+\begin{table}
+	\begin{tabular}{lcccc}
+	\input{figures_and_tables/3_balance_intcatlogit2o1.tex}
+	\end{tabular}
+	\caption{Balance check: interactions using exports as categorical instead of continuous variable logit 2 on 1}
+	\label{bal_intcatlog2}
+\end{table}
+
+\begin{table}
+	\begin{tabular}{lcccc}
+	\input{figures_and_tables/3_balance_intcatlogit4o1.tex}
+	\end{tabular}
+	\caption{Balance check: interactions using exports as categorical instead of continuous variable logit 4 on 1}
+	\label{bal_intcatlog4}
+\end{table}
 
 \end{document}

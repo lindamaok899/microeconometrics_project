@@ -3,10 +3,14 @@ clear all
 cap log close
 set matsize 11000
 
-cd "SDExtension:\claud\00_promo\Kurse\micrometric methods (ASP)\Datasets and do files"
+cd"../../Volumes/SDExtension/claud/00_promo/Kurse/micrometric methods (ASP)/microeconometrics_project"
 
-log using take_home, replace
-use FDI_project.dta, clear
+
+log using "/stata_files/take_home.log", replace
+use "../Datasets and do files/FDI_project.dta", clear
+
+label variable RD2015 "R\&D dummy in 2015"
+label variable RD2017 "R\&D dummy in 2017"
 
 * Task 2: descriptives
  global T "TECH OWN PORT"
@@ -56,85 +60,115 @@ use FDI_project.dta, clear
 	graph export write-up/graphs/bar_pre_post.eps
 	graph drop _all
 	
-	***Generate categorical variable with export intensity before treatment
+	
+ 
+* Task 3: use outcome vars loemp and logwages
+
+***Generate categorical variable with export intensity before treatment
 	gen EXP2015_CAT = .
 	replace EXP2015_CAT = 0 if EXP2015==0
 	replace EXP2015_CAT = 1 if EXP2015>0 & EXP2015<0.25
 	replace EXP2015_CAT = 2 if EXP2015<0.5 & EXP2015>=0.25
 	label var EXP2015_CAT "Export intensity 2015, category"
-	label define EXP2015_CAT 0 "no exports" 1 "<25%" 2 ">25%"
- 
-* Task 3: use outcome vars loemp and logwages
- global D "RD2015 TECH OWN PORT"
- global C "logwages2015 TFP2015 logemp2015 EXP2015 DEBTS2015"
- global c "logwages2015 TFP2015 logemp2015 DEBTS2015"
- global cat "RD2015 TECH OWN PORT EXP2015_CAT"
- 
+	label define EXP2015_CAT 0 "no exports" 1 "<25%" 2 ">25%" 
+
+	 global D "RD2015 TECH OWN PORT"
+	 global C "logwages2015 TFP2015 logemp2015 EXP2015 DEBTS2015"
+	 global c "logwages2015 TFP2015 logemp2015 DEBTS2015"
+	 global cat "RD2015 TECH OWN PORT EXP2015_CAT"
+	 
+  
 	 * show imbalance across treatment
-	 logit FDI2016 c.($C)#i.($D)
- 
-	 * EMPLOYMENT: 
+	 logit FDI2016 c.($C) i.($D) , robust
+		eststo T1
+		esttab T1 using "latex_code/figures_and_tables/3_selection.tex", replace ///
+		title(Logit estimation results of FDI on pre-treatment observables \label{selection_logit}) ///
+		cells("b(star fmt(%9.4f)) se(par fmt(%9.3f))") compress ///
+		starlevels (* 0.1 ** 0.05 *** 0.01) ///
+		label
+		
+	 * EMPLOYMENT:  
 	 * psmatch with logit to estimate propensity score
 	 teffects psmatch (logemp2017 )(FDI2016 c.($C) i.($D) , logit )
 	 tebalance summarize
-	 teffects overlap, ptlevel(1)  
+	 estout r(table) using "latex_code/figures_and_tables/3_balance_linearlogit1o1.tex", style(tex) replace ///
+	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match") label
+	 teffects overlap, ptlevel(1) 
+	 graph export  "latex_code/figures_and_tables/3_overlap_linearlogit1o1.pdf", replace
 	 
-	 * NNM(2) psmatch with logit to estimate propensity score
-	 teffects psmatch (logemp2017 )(FDI2016 c.($C) i.($D) , logit ) , nneighbor(2)
+	 * psmatch with logit and interactions to estimate propensity score
+	 teffects psmatch (logemp2017 )(FDI2016 c.($C)#i.($D) , logit )
 	 tebalance summarize
-	 teffects overlap, ptlevel(1)  
+	 estout r(table) using "latex_code/figures_and_tables/3_balance_intlogit1o1.tex", style(tex) replace ///
+	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
+	 teffects overlap, ptlevel(1) 
+	 graph export  "latex_code/figures_and_tables/3_overlap_intlogit1o1.pdf", replace
+	 		* overlap improves slightly, balance improves also. both still not convincing
 	 
-	 * NNM(4) caliper .1 psmatch with logit to estimate propensity score
-	 teffects psmatch (logemp2017 )(FDI2016 c.($C) i.($D), logit), nneighbor(4) caliper(.1)
+	 * psmatch with proobit to estimate propensity score
+	 teffects psmatch (logemp2017 )(FDI2016 c.($C)#i.($D) , probit ),  osample(o1)
+	 teffects psmatch (logemp2017 )(FDI2016 c.($C)#i.($D) , probit ) if o1 == 0
 	 tebalance summarize
-	 teffects overlap, ptlevel(1)  
-	 graph export  th_t3_2.pdf, replace
-	 
-	  * NNM(2) psmatch with probit 
-	 teffects psmatch (logemp2017 )(FDI2016 c.($C) i.($D) , probit), nneighbor(2) osample(o1)
-	 teffects psmatch (logemp2017 )(FDI2016 c.($C) i.($D) , probit) if o1 == 0, nneighbor(2)
-	 tebalance summarize
-	 teffects overlap, ptlevel(1)  
-	 graph export  th_t3_3.pdf, replace
-	 
-	 * NNM(4) caliper .1 psmatch with logit and interaction effects to estimate propensity score
-	 teffects psmatch (logemp2017 )(FDI2016 c.($C)#i.($D) , logit), nneighbor(4) caliper(.1)
-	 tebalance summarize
-	 teffects overlap, ptlevel(1)  
-	 graph export  th_t3_2.pdf, replace
-	 
-	 * NNM(4) caliper .1 psmatch with probit and interaction effects to estimate propensity score
-	 teffects psmatch (logemp2017 )(FDI2016 c.($C)#i.($D) , probit), nneighbor(4) caliper(.1) osample(o1)
-	 teffects psmatch (logemp2017 )(FDI2016 c.($C)#i.($D) , probit) if o1 == 0, nneighbor(4) caliper(.1)
-	 tebalance summarize
-	 teffects overlap, ptlevel(1)  
-	 graph export  th_t3_2.pdf, replace
-	 
-	* add doubly robust estimator
-	teffects aipw (logemp2017 c.($C) i.($D) )(FDI2016 c.($C) i.($D) ) ,  osample(o5)
-	teffects aipw (logemp2017 c.($C) i.($D) )(FDI2016 c.($C) i.($D) ) if o5==0 
-	tebalance summarize
-	teffects overlap, ptlevel(1)  
+	 estout r(table) using "latex_code/figures_and_tables/3_balance_intprobit1o1.tex", style(tex) replace ///
+	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
+	 teffects overlap, ptlevel(1) 
+	 graph export  "latex_code/figures_and_tables/3_overlap_intprobit1o1.pdf", replace
+		* balancenednes test still shows large differences here and there, 		
+		
+	 * psmatch with logit to estimate propensity score
+	 teffects psmatch (logemp2017 )(FDI2016 c.($C) , logit )
+	 teffects overlap, ptlevel(1) 
+	 graph export  "latex_code/figures_and_tables/3_overlap_linearlogit1o1_reduced.pdf", replace
 	 
 	 * usign EXP2015_CAT, logit, 
 	 teffects psmatch (logemp2017 )(FDI2016 c.($c)#i.($cat) , logit )
-	 tebalance summarize 
-	 teffects overlap, ptlevel(1)  
+	 eststo ate_emp
+	 tebalance summarize
+	 estout r(table) using "latex_code/figures_and_tables/3_balance_intcatlogit1o1.tex", style(tex) replace ///
+	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
+	 teffects overlap, ptlevel(1) 
+	 graph export  "latex_code/figures_and_tables/3_overlap_intcatlogit1o1.pdf", replace
 		* I found best balancedness for just taking the nearest neighbour instead of the four nearest, or four nearest and a caliper
 		* overlap is insensitive to this manipulation (obviously)
 	 
+	 * usign EXP2015_CAT, logit, nn(2)
+	 teffects psmatch (logemp2017 )(FDI2016 c.($c)#i.($cat) , logit ), nneighbor(2)
+	 tebalance summarize
+	 estout r(table) using "latex_code/figures_and_tables/3_balance_intcatlogit2o1.tex", style(tex) replace ///
+	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
+	 teffects overlap, ptlevel(1) 
+	 graph export  "latex_code/figures_and_tables/3_overlap_intcatlogit2o1.pdf", replace
+		* no change in overlap, but balancedness worsens
+	 
+	 * usign EXP2015_CAT, logit, nn(4) caliper
+	 teffects psmatch (logemp2017 )(FDI2016 c.($c)#i.($cat) , logit ), nneighbor(4) caliper(.1)
+	 tebalance summarize
+	 estout r(table) using "latex_code/figures_and_tables/3_balance_intcatlogit4o1.tex", style(tex) replace ///
+	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
+	 teffects overlap, ptlevel(1) 
+	 graph export  "latex_code/figures_and_tables/3_overlap_linearlogit4o1.pdf", replace 
+		* no change in overlap, but balancedness worsens
+	  
 	 * WAGES 
 	 teffects psmatch (logwages2017 )(FDI2016 c.($c)#i.($cat) , logit )
-	 graph export  th_t3_2.pdf, replace
- 
-
+	 eststo ate_wage
+	 
+	 * construct Wages and employment effects output table
+		esttab ate_emp ate_wage using "latex_code/figures_and_tables/3_ate.tex", replace ///
+		cells(b(star fmt(%9.4f)) se(par fmt(%9.3f))) compress ///
+		legend label mtitle  starlevels (* 0.1 ** 0.05 *** 0.01) ///
+		title(Impact of FDI on Wages and Employment \label{ates}) ///
+		coef(r1vs0.FDI2016 "ATE") mtitle("Log Employment" "Log Wages" )
+	
 * Task 4: use FDIType
-
-	teffects aipw (logemp2017 c.($C) i.($D) )(FDITYPE2016 c.($c)#i.($cat)) ,  osample(o5)
-	teffects aipw (logemp2017 c.($C) i.($D) )(FDITYPE2016 c.($c)#i.($cat) ) if o5==0 
+	
+	* look at doubly robust estimation results
+	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDI2016 c.($c)#i.($cat))
 	tebalance summarize
 	teffects overlap, ptlevel(1)  
-  
+		* blancing is slightly worse, overlap still good, but potentially large bias due to large number of firms with score close to 0
+	
+	
 	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) , osample(o6)
 	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat)) if o6==0 
 	tebalance summarize
@@ -143,39 +177,22 @@ use FDI_project.dta, clear
 	teffects aipw (logwages2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) if o7==0 
 	tebalance summarize
 	
-	teffects aipw (logwages2017 c.($C)#i.($D) )(FDITYPE2016 c.($C)#i.($D) ) ,  osample(o8)
-	teffects aipw (logwages2017 c.($C)#i.($D) )(FDITYPE2016 c.($C)#i.($D) ) if o8==0 
-	tebalance summarize
+	
+* Task 5: limitations
+	
+	logit FDI2016 c.($c)#i.($cat), robust
+	predict pscore_doubly
+	lab var pscore_doubly "Propensity score: doubly"
+	
+	drop if pscore_doubly > 0.9
+	drop if pscore_doubly < 0.1
+	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDI2016 c.($c)#i.($cat))
+	
+	drop if pscore_doubly > 0.6
+	drop if pscore_doubly < 0.2
+	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDI2016 c.($c)#i.($cat))
+	
 	
  log close
  
 
-N = 11.323
-Nvars = 17
-
-
-identifiers: 
-firm
-OWN
-TECH
-PORT
-
-Treatment vars: 
-FDI2016
-FDITYPE2016
-
-potential outcome vars: 
-logwages2017  out1
-TFP2017
-logemp2017	out2
-EXP2017
-RD2017
-
-
-pre-treatment indicators:
-logwages2015
-TFP2015
-logemp2015
-DEBTS2015
-EXP2015
-RD2015
