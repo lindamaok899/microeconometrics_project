@@ -1,0 +1,135 @@
+\documentclass[11pt]{article}
+\usepackage{anysize}
+\marginsize{2.75cm}{2.75cm}{1.75cm}{1.75cm}
+%\marginsize{left}{right}{top}{bottom}
+\usepackage{amsmath}
+\usepackage{dsfont}
+%\usepackage[dvips]{graphicx}
+\usepackage{graphicx}
+\usepackage{lscape}
+	
+\usepackage{pdflscape}
+\usepackage{array}
+\usepackage{rotating,capt-of,varwidth}
+\usepackage{longtable}
+\usepackage{setspace}
+%\usepackage{harvard}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{subfigure}
+\usepackage[figuresright]{rotfloat}
+%\usepackage{epstopdf}
+\usepackage{natbib}
+\usepackage[justification=centering]{caption}
+
+
+\pagestyle{plain}
+
+\bibliographystyle{dcu}
+%\citationstyle{dcu}
+
+\parindent0em
+\parskip2.0ex plus0.5ex minus0.2ex
+
+\renewcommand{\thesubfigure}{\thefigure.\arabic{subfigure}}
+
+\newcommand{\maketableline}{\noalign{\smallskip}\midrule\noalign{\smallskip}}
+\newcommand{\maketabletopline}{\noalign{\smallskip}\toprule\noalign{\smallskip}}
+\newcommand{\maketablebottomline}{\noalign{\smallskip}\bottomrule\noalign{\smallskip}}
+\newcommand{\mc}{\mathcal}
+\newcommand{\sumlow}{\sum\nolimits}
+\newcommand{\fref}[1]{Figure \ref{#1}}
+\newcommand{\fsref}[2]{Figures \ref{#1} to \ref{#2}}
+\newcommand{\fandref}[2]{Figures \ref{#1} and \ref{#2}}
+\newcommand{\eref}[1]{Equation (\ref{#1})}
+\newcommand{\esref}[2]{Equations (\ref{#1}) to (\ref{#2})}
+\newcommand{\eandref}[2]{Equations (\ref{#1}) and (\ref{#2})}
+\newcommand{\tref}[1]{Table \ref{#1}}
+\newcommand{\tsref}[2]{Tables \ref{#1} to \ref{#2}}
+\newcommand{\tandref}[2]{Tables \ref{#1} and \ref{#2}}
+\newcommand{\sref}[1]{Section \ref{#1}}
+\newcommand{\sandref}[2]{Sections \ref{#1} and \ref{#2}}
+\newcommand{\ssref}[2]{Sections \ref{#1} to \ref{#2}}
+\newcommand{\aref}[1]{Appendix \ref{#1}}
+\renewcommand{\footnoterule}{\rule{6cm}{0.2pt}\vspace{3pt}}
+\newcommand{\mb}[1]{\text{\boldmath$#1$}}
+\newcommand{\tc}{\textcolor}
+
+\linespread{1.2}
+\begin{document}
+
+\section{Data and descriptive statistics}
+
+The aim of our research project is to estimate the impact of foreign direct investment (FDI) on labor market outcomes. More specifically, we analyze the effect of FDI on employment and wages. We use firm-level data for the years 2015 to 2017. In 2016, some of the firms receive FDI. The receipt of FDI is referred to as treatment in the following. Table \ref{sumstat} shows summary statistics for the main variables included in our dataset, both for 2015 -- i.e. our pre-treatment period -- and 2017 -- i.e. the post-treatment  period. We have information on wages, employment, total factor productivity (TFP), debt, export intensity as well as a dummy variable indicating whether a firm engages in research and development activities. In total, 11,323 firms are included in our dataset. On average, wages decreased from 2015 to 2017, while TFP, employment, export intensity, and the share of firms engageing in R\&D  increased. We do not have information on debt in 2017.
+
+
+\begin{table}[htbp]\centering \caption{Summary statistics\label{sumstat}}
+\input{tables/sumstats.tex}
+ \end{table}
+
+
+Table \ref{sumstat_treatment} reports our main variables by treatment, i.e. for two subsamples: firms receiving FDI in 2016 (4,460 or 39\%)  and firms not receiving FDI (6,884). In addition, we report the differences in means as well as the p-values of a t-test of the null hypothesis that means are equal across groups. For most of the pre-treatment variables the null hypothesis can be rejected, providing first evidence that treatment is not randomly assigned but depends on firm-level characteristics. Firms receiving FDI, on average, pay lower wages, employ more workers, have a lower level of TFP and export more of their production. There are no significant differences regarding R\&D activities. 
+
+\begin{table}[htbp]\centering \caption{Summary statistics by treatment status\label{sumstat_treatment}}
+\input{tables/sumstats_bytreatment_obs.tex}
+\end{table} 
+
+
+In addition, our dataset provides information on several firm-level characteristics that do not change over the time period studied: the firm's level of technology, its ownership structure, and its access to the world market, proxied by a dummy variable indicating whether there is a port within 500km of the firm's location. Roughly one third of the firms in our dataset are in the low-tech and medium-high tech industries each, and roughly one sixth each is in the low- and high-tech sectory, respectively. At 40\%, the largest share of firms in our dataset is independent, followed by state-owned firms (28\%) and subsidiaries (23\%). Only 8\% of firms are listed companies. One third of the firms has access to a port within 500km.
+
+Table \ref{treatment_char} gives an overview of the frequency distribution of treatment across these characteristics and provides further evidence that treatment is non-random. Thus, the share of firms receiving FDI is comparatively high in the low- and medium-low-technology sector. Among the firms receiving FDI, roughly 70\% are in those sectors, compared with only 40\% of the firms not receiving FDI. Access to ports is also unbalanced across treatment groups, and more prevalent among those firms receiving FDI. Regarding the ownership structure, the share of listed companies is lower among treated than non-treated firms, while the shares of independent and state-owned firms are somewhat higher. 
+
+
+\begin{centering}
+\begin{table}[htbp]\centering \caption{Characteristics of treated and non-treated firms\label{treatment_char}}
+\begin{tabular}[htbp!]{lrrrrrrrrrr}
+\hline\hline
+\input{tables/FDI_treatment_characteristics.tex}
+\hline\hline
+\end{tabular} 
+ \end{table}
+ \end{centering}
+ 
+ 
+ \section{Linda's part}
+ 
+When analyzing the impact of FDI on wages and employment at the firm level, the  motive of the foreign investor might also play a role. For example, investors trying to sell their products in the destination country of their investment  may be particularly concerned about their reputation in the host country, potentially leading to higher wage payments. Our dataset also provides information on the type of FDI and distiguishes across four categories: exports-oriented FDI (1),  technology-intensive FDI (2), and domestic market seeking FDI (3). Of the firms receiving FDI, 44\% receiv domestic-market seeking FDI, follow by 35\% that receive technology-intensive FDI. The share of firms receiving export-oriented FDI is 21\%.
+
+Figure \ref{fig_treatment_type} provides a graphical illustration of the main variables by type of FDI, displaying the means of wages, employment, TFP, export intesnity and R\&D for 2015 and 2017, respectivly. In addition, the graph displays the means for firms not receiving FDI (0). The corresponding Tables can be found in the Appendix (Tables \ref{sumstat_treatment_type_pre} and \ref{sumstat_treatment_type_post}). While the differences in means across types of FDI are relativley small when it comes to wages, employment, export intensity and TFP both in 2015 and 2017, the differences across FDI types are large regarding R\&D activities.
+
+
+
+\begin{figure}[htbp!]\caption{Pre- and post-treatment characteristics by treatment group}\label{fig_treatment_type}
+\begin{center}
+\includegraphics[scale=1]{figures/bar_pre_post} 
+\end{center}
+\end{figure}
+
+
+\newpage
+
+\section{Appendix}
+\begin{table}[htbp]\centering 
+\caption{Summary statistics for pre-treatment variables by treatment categories\label{sumstat_treatment_type_pre}}
+\input{tables/sumstats_pre_bytreatmentgroup_obs.tex}
+\end{table} 
+
+
+\begin{table}[htbp]\centering \caption{Summary statistics for post-treatment variables by treatment categories\label{sumstat_treatment_type_post}}
+\input{tables/sumstats_post_bytreatmentgroup_obs.tex}
+\end{table} 
+
+\begin{centering}
+\begin{table}[htbp]\centering \caption{Characteristics of firms by FDI type received\label{treatment_type_char}}
+\begin{tabular}[htbp!]{lrrrrrrrrrr}
+\hline\hline
+\input{tables/FDI_type_characteristics.tex}
+\hline\hline
+\end{tabular} 
+ \end{table}
+ \end{centering}
+
+
+\end{document}
