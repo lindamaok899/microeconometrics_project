@@ -1,21 +1,21 @@
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_intlogit1o1.pdf}\
-	\caption{Overlap: int logit 1 on 1 }
+	\caption{Overlap resulting from the propensity scoring using a logit model (interactions between the set of continuous variables and the set of categorical/binary variables)}
 	\label{ol_intlog1}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_intprobit1o1.pdf}\
-	\caption{Overlap: int probit 1 on 1 }
+	\caption{Overlap resulting from the propensity scoring using a probit model (interactions between the set of continuous variables and the set of categorical/binary variables)}
 	\label{ol_intprob1}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_linearlogit1o1_reduced.pdf}\
-	\caption{Overlap: lin logit 1 on 1 reduced set (excl. cat/binary) }
+	\caption{Overlap resulting from the propensity scoring using a logit model (linear inclusion of continuous variables only)}
 	\label{ol_linlog1_red}
 \end{figure}
 
@@ -25,7 +25,7 @@
 	\input{figures_and_tables/3_balance_intcatlogit2o1.tex}
 	 \hline \hline
 	\end{tabular}
-	\caption{Balance check: interactions using exports as categorical instead of continuous variable logit 2 on 1}
+	\caption{Balance check of the propensity scoring using a logit model (interactions between the set of continuous variables excluding exports and the set of categorical/binary variables including exports) and a 2 on 1 matching procedure}
 	\label{bal_intcatlog2}
 \end{table}
 
@@ -35,7 +35,7 @@
 	\input{figures_and_tables/3_balance_intcatlogit4o1.tex}
 	 \hline \hline
 	\end{tabular}
-	\caption{Balance check: interactions using exports as categorical instead of continuous variable logit 4 on 1}
+	\caption{Balance check of the propensity scoring using a logit model (interactions between the set of continuous variables excluding exports and the set of categorical/binary variables including exports) and a 4 on 1 matching procedure}
 	\label{bal_intcatlog4}
 \end{table}
 
@@ -45,6 +45,6 @@
 		\input{figures_and_tables/3_balance_aipw.tex}
 		 \hline \hline
 	\end{tabular}
-	\caption{Balance check: AIPW estimation}
+	\caption{Balance check of AIPW estimation (using interactions between the set of continuous variables excluding exports and the set of categorical/binary variables including exports)} 
 	\label{bal_aipw}
 \end{table}
