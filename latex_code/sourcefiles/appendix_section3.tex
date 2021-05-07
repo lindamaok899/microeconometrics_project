@@ -1,0 +1,50 @@
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_intlogit1o1.pdf}\
+	\caption{Overlap: int logit 1 on 1 }
+	\label{ol_intlog1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_intprobit1o1.pdf}\
+	\caption{Overlap: int probit 1 on 1 }
+	\label{ol_intprob1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{figures_and_tables/3_overlap_linearlogit1o1_reduced.pdf}\
+	\caption{Overlap: lin logit 1 on 1 reduced set (excl. cat/binary) }
+	\label{ol_linlog1_red}
+\end{figure}
+
+\begin{table}
+	\begin{tabular}{lcccc}
+		 \hline \hline
+	\input{figures_and_tables/3_balance_intcatlogit2o1.tex}
+	 \hline \hline
+	\end{tabular}
+	\caption{Balance check: interactions using exports as categorical instead of continuous variable logit 2 on 1}
+	\label{bal_intcatlog2}
+\end{table}
+
+\begin{table}
+	\begin{tabular}{lcccc}
+		 \hline \hline
+	\input{figures_and_tables/3_balance_intcatlogit4o1.tex}
+	 \hline \hline
+	\end{tabular}
+	\caption{Balance check: interactions using exports as categorical instead of continuous variable logit 4 on 1}
+	\label{bal_intcatlog4}
+\end{table}
+
+\begin{table}
+	\begin{tabular}{lcccc}
+		 \hline \hline
+		\input{figures_and_tables/3_balance_aipw.tex}
+		 \hline \hline
+	\end{tabular}
+	\caption{Balance check: AIPW estimation}
+	\label{bal_aipw}
+\end{table}

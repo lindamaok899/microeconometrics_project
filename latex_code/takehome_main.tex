@@ -1,0 +1,78 @@
+\documentclass[11pt,a4paper,leqno]{article}
+\usepackage{a4wide}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{lmodern,textcomp}
+\usepackage{float, afterpage, rotating, graphicx}
+\usepackage{longtable, booktabs, tabularx}
+\usepackage{verbatim}
+\usepackage{eurosym, calc, chngcntr}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, bm, delarray} 
+\usepackage{caption}
+\usepackage{datetime}
+\usepackage{tkz-graph}
+\usepackage{enumitem}
+\usepackage[multiple]{footmisc}
+\usepackage{multirow}
+\usepackage{pdfpages}
+\usetikzlibrary{arrows,positioning,snakes,shapes,shapes.multipart,patterns,mindmap,shadows}
+\usepackage{natbib}
+\usepackage{subcaption}
+\bibliographystyle{chicago}
+
+
+\usepackage[tikz]{bclogo}
+
+\usepackage[framemethod=tikz]{mdframed}
+\mdfdefinestyle{mystyle}{%
+	rightline=true,
+	innerleftmargin=10,
+	innerrightmargin=10,
+	outerlinewidth=3pt,
+	topline=false,
+	rightline=true,
+	bottomline=false,
+	skipabove=\topsep,
+	skipbelow=\topsep
+}
+
+\begin{document}
+ \begin{center}
+	\begin{LARGE}
+		\textbf{
+			ASP Course on Microeconometric Methods (2021)\\
+			 - Take Home Assignment -\\
+		}
+	\end{LARGE}
+	\vspace{0.2cm}
+	{\large \textbf{Project A}} \\\vspace{0.2cm}
+	{\large \textbf{Susann Adloff, Linda Maokomatanda, Saskia Meuchelböck}} \vspace{0.2cm}
+\end{center}
+
+\section*{Section 1}
+\input{sourcefiles/section1}
+
+\section*{Section 2} 
+\input{sourcefiles/section2}
+
+\section*{Section 3} 
+\input{sourcefiles/section3}
+\clearpage
+
+\section*{Section 4} 
+\input{sourcefiles/section4}
+
+\section*{Section 5} 
+\input{sourcefiles/section5}
+
+
+\clearpage
+\bibliography{micromeths.bib}
+
+
+\appendix
+\section*{Appendix}
+\input{sourcefiles/appendix_section2}
+\input{sourcefiles/appendix_section3}
+
+\end{document}
