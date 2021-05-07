@@ -3,7 +3,8 @@ clear all
 cap log close
 set matsize 11000
 
-cd "SDExtension:\claud\00_promo\Kurse\micrometric methods (ASP)\Datasets and do files"
+
+*cd "SDExtension:\claud\00_promo\Kurse\micrometric methods (ASP)\Datasets and do files"
 
 log using take_home, replace
 use FDI_project.dta, clear
@@ -15,6 +16,7 @@ use FDI_project.dta, clear
 	
 	* full dataset
 	summarize 
+	ssc install sutex2
 	sutex2 FDI2016-RD2017, saving("write-up/tables/sum_stat.tex") replace ///
 	caption(Summary statistics) minmax varlab
 	
@@ -110,42 +112,73 @@ use FDI_project.dta, clear
 	 teffects overlap, ptlevel(1)  
 	 graph export  th_t3_2.pdf, replace
 	 
-	* add doubly robust estimator
-	teffects aipw (logemp2017 c.($C) i.($D) )(FDI2016 c.($C) i.($D) ) ,  osample(o5)
-	teffects aipw (logemp2017 c.($C) i.($D) )(FDI2016 c.($C) i.($D) ) if o5==0 
-	tebalance summarize
-	teffects overlap, ptlevel(1)  
 	 
 	 * usign EXP2015_CAT, logit, 
 	 teffects psmatch (logemp2017 )(FDI2016 c.($c)#i.($cat) , logit )
 	 tebalance summarize 
-	 teffects overlap, ptlevel(1)  
+	 teffects overlap, ptlevel(1) 
 		* I found best balancedness for just taking the nearest neighbour instead of the four nearest, or four nearest and a caliper
 		* overlap is insensitive to this manipulation (obviously)
+		
+		
+	* Robustness checks for our estimation above
+	* source: https://www.stata.com/stata-news/news29-1/double-robust-treatment-effects/
+	
+	*RA
+	teffects ra (logemp2017 c.($c)#i.($cat) )(FDI2016)
+	tebalance summarize
+	 *the propensity scoring model is probably not correctly specified as seen with the high standard errors
+	
+	* ipw
+	teffects ipw  (logemp2017 )(FDI2016 c.($c)#i.($cat) )
+	tebalance summarize
+	
+	*aipw
+	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDI2016 c.($c)#i.($cat) )
+	tebalance summarize
+	
+	* ipwra
+	teffects ipwra (logemp2017 c.($c)#i.($cat) )(FDI2016 c.($c)#i.($cat) )
 	 
 	 * WAGES 
-	 teffects psmatch (logwages2017 )(FDI2016 c.($c)#i.($cat) , logit )
+	 *estimate this with the estomator of choice later after discussion on Thursday
+	  teffects aipw (logwages2017 c.($c)#i.($cat) )(FDI2016 c.($c)#i.($cat) )
+	 tebalance summarize
+
+	 
+	 
 	 graph export  th_t3_2.pdf, replace
  
 
-* Task 4: use FDIType
+* Task 4: use FDITYPE2016 variable to re-estimate FDI by type
+	
+	* ipw: estimates effects on the treatement model
+	** no interactions
+	teffects ipw  (logemp2017 )(FDITYPE2016 c.($c) i.($cat) )
+	tebalance summarize	
+	
+	** interactions
+	teffects ipw  (logemp2017 )(FDITYPE2016 c.($c)#i.($cat) ),  osample(o5)
+	teffects ipw (logemp2017)(FDITYPE2016 c.($c)#i.($cat) ) if o5==0
+	tebalance summarize	
+	teffects overlap, ptlevel(1)
 
-	teffects aipw (logemp2017 c.($C) i.($D) )(FDITYPE2016 c.($c)#i.($cat)) ,  osample(o5)
-	teffects aipw (logemp2017 c.($C) i.($D) )(FDITYPE2016 c.($c)#i.($cat) ) if o5==0 
-	tebalance summarize
-	teffects overlap, ptlevel(1)  
-  
+	* aipw: estimates effects on the treatement and outcome models
+	** interactions
 	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) , osample(o6)
 	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat)) if o6==0 
 	tebalance summarize
-  
-	teffects aipw (logwages2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) ,  osample(o7)
+	teffects overlap, ptlevel(1)
+	
+	
+	
+	* Wages regression using AIPW
+	teffects aipw (logwages2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) , osample(o7)
 	teffects aipw (logwages2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) if o7==0 
 	tebalance summarize
 	
-	teffects aipw (logwages2017 c.($C)#i.($D) )(FDITYPE2016 c.($C)#i.($D) ) ,  osample(o8)
-	teffects aipw (logwages2017 c.($C)#i.($D) )(FDITYPE2016 c.($C)#i.($D) ) if o8==0 
-	tebalance summarize
+	
+	
 	
  log close
  

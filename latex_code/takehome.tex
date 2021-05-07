@@ -91,11 +91,11 @@ In Section $2$, we will provide a discussion of the most important features of t
 	\item selection into treatment (likely) non-random, firms receiving FDIs likely chosen based on their (observable!) pre-treatment performance, which is thus correlated with treatment assignment as well as with post-treatment performance, by definition. 
 	\item compare balancedness of *2015 vars across treatment conditions.  --> check for which/how many variables are unbalanced.
 	\item regression output
-	\begin{itemite}
+	\begin{itemize}
 		\item unbalanced in wages, TFP, employment, export intensity and debt. R\&D are not too different between treated and untreated
 		\item unbalanced in terms of firm kinds as well
 		\item $\rightarrow$ violation of CIA and curse of dimensionality  
-	\end{itemite}
+	\end{itemize}
 
 	\item compute propensity score measure using logit function/ probit function or varying the matching algorithm (number of neighbours, caliper), check for common support condition, compute ATE. Outcome variables of interest: employment and wages
 	\item goal in this process is to achieve a propensity score measure that achieves balancedness in terms of relevant observables, on one hand and a good treatment overlap on the other. This is not trivial. Imagine a situation in which treatment is assigned according to one specific set of variables being high. If matching is performed based on this variable set then propensity scores will be high for firms with high values along this set of variables and matching of firms with similar propensity scores will produce very little differences in variables. Yet, this will produce a most certainly bad overlap. Opposed to that using a variable that is not related to treatment assignment for the propensity score matching will produce a high overlap as propensity scores calculated based on a unrelated variable will be similarly distributed within treatment and non-treatment groups, but it will be unlikely that this matching procedure will be able to balance the previously unbalanced variables. Consequently, a scoring function specification has to be found that involves all variables relevant for treatment assignment but in a way that produces high overlap.
@@ -180,11 +180,84 @@ In Section $2$, we will provide a discussion of the most important features of t
 	\item check 
 \end{itemize}
 
+When analysing the impact of FDI on wages and employment at the firm level, the motive of the foreign investor might also play a role. For example, investors trying to sell their products in the destination country of their investment may be particularly concerned about their reputation in the host country, potentially leading to higher wage payments. Our dataset also provides information on the type of FDI and distinguishes across four categories: exports-oriented FDI (1), technology-intensive FDI (2), and domestic market seeking FDI(3). Of the firms receiving FDI, 44\% receive domestic-market seeking FDI, followed by 35\% that receive technology-intensive FDI. The share of firms receiving export-oriented FDI is 21/\%. Figure 1 provides a graphical illustration of the main variables by type of FDI, displaying the means of wages, employment, TFP, export intensity and R\&D for 2015 and 2017, respectively and in addition, the graph displays the means for firms not receiving FDI (0). The corresponding Tables can be found in the Appendix (Tables 4 and 5). While the differences in means across the types of FDI are relatively small when it comes to wages, employment, export intensity and TFP both in 2015 and 2017, the differences across FDI types are large regarding R\&D activities.
+
+With this knowledge in mind, we re-estimate the causal effects of FDI by type to examine if there are any differences in comparison to our analysis in Section 3. We are particularly focused on using the weighted estimators, IPW and AIPW as we have concluded and shown earlier that these, particularly the AIPW, give us a consistent estimator if one of our models is incorrectly specified. As we have shown in Section 3, we suspect that our treatment model is probably incorrectly specified and so we rely on the AIPW estimates in this section as well. To be thorough, we also estimate the IPW estimator as a robustness exercise, as well as examine two cases of variable specifications: the model where we have interactions and the model where we do not have interaction terms. As is the case in section 3, the IPW estimator produces biased estimates, judging from the exceptionally large standard errors – an indication of possible misspecification in our treatment model. Because balance improves when we use interactions in our model, we only estimate the interacted model for our further analysis.  We then estimate our treatment and outcome model using the double robust estimator. 
+
+
+\begin{table}
+	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+	\caption{Causal effects of FDI (by type) on employment}
+\begin{tabular}{l*{1}{cccc}}
+	\hline\hline
+	&\multicolumn{4}{c}{}                                        \\
+	& (1) & (2) & (3)    \\
+	\
+	&ipw & ipw (interactions) & aipw (imteractions)    \\
+	\\
+	&b/se&b/se& b/se       \\
+	\hline
+	\\
+	ATE \\
+	\\
+	Export Oriented FDI &       0.73\sym{***} &  0.25  &   0.27\sym{***} \\
+	&     (0.07)&     (0.42)&   (0.03)        \\
+	Technology Intenstive FDI&       0.87\sym{***}&       0.59 &       0.28\sym{***}\\
+	&     (0.08)&     (0.42)& (0.03)          \\
+	Domestic Market Seeking FDI&       0.72\sym{***}&       0.21 &      0.27\sym{***}\\
+	&     (0.06)&     (0.44)&     (0.03)   \\
+	\hline
+	\\
+	Observations        &       11,323 &      11,318      &   11,318                  &            \\
+	\hline\hline
+	\\
+	\small * p<0.1, ** p<0.05, *** p<0.01
+\end{tabular} \\
+\end{table}
+
+\begin{table}
+	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+	\centering
+	\caption{Causal effects of FDI (by type) on wages}
+	\begin{tabular}{l*{1}{cccc}}
+		\hline\hline
+		&\multicolumn{1}{c}{}                                        \\
+		& (1)   \\
+		\
+		&aipw (interactions)     \\
+		\\
+		&b/se       \\
+		\hline
+		\\
+		ATE \\
+		\\
+		Export Oriented FDI &       0.21\sym{***}   \\
+		&     (0.02)        \\
+		Technology Intenstive FDI&       0.22\sym{***} \\
+		&     (0.03)         \\
+		Domestic Market Seeking FDI&       0.23\sym{***}\\
+		&     (0.02)   \\
+		\hline
+		\\
+		Observations        & 11,318          
+		 &                 &            \\
+		\hline\hline
+		\\
+		\small * p<0.1, ** p<0.05, *** p<0.01
+	\end{tabular} \\
+\end{table}
+
+
+Table \ref{} shows that for all the firm sectors, the average treatment effect is the same, thus – for firms which are export oriented and technology intensive, the average treatment effect for employment is estimated to be about 0.28 when compared to firms which do not have any FDI at all, with that for domestic market seeking firms a bit higher. The average treatment effect for employment is estimated to be 4.9 when no firms receive FDI at all. For wages, we observe the same trend as shown in Table \ref{label}, with the ATE for export oriented,  technology intensive firms and domestic market seeking firms being 0.2. We suspect that the ATEs are similar across FDI types because the differences in means across the types of FDI are relatively small for wages and employment, but would be different for other variables in the dataset. Furthermore, overlap significantly improves in our estimation of IPW and AIPW, but is still partial as we do not manage to get a good overlap on the control variables with propensity score values between 0 and 0.1.
+
 \section*{Section 5} 
 \textit{This is a summary and conclusion section where you should give an overall evaluation of your work including possible shortcomings.}
 \begin{itemize}
 	\item severe shortcoming: overlap bad if we include all variables relevant in the logit specification, dropping variables  
 \end{itemize}
+
+
+
 
 \nocite{chen2011}
 \clearpage
