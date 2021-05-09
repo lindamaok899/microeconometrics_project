@@ -1,0 +1,149 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\linda\Desktop\microeconometrics_project\stata_code\take_home.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 May 2021, 21:01:38
+{txt}
+{com}. use FDI_project.dta, clear
+{txt}
+{com}. 
+. * Adjust labels
+. label var logwages2015 "Wages in 2015 (logs)"
+{txt}
+{com}. label var logwages2017 "Wages in 2017 (logs)"
+{txt}
+{com}. label var logemp2015 "Employment in 2015 (logs)"
+{txt}
+{com}. label var logemp2017 "Emplyoment in 2017 (logs)"
+{txt}
+{com}. label var DEBTS2015 "Debt in 2015 (logs)"
+{txt}
+{com}. label var RD2015 "RD in 2015 (dummy)"
+{txt}
+{com}. label var RD2017 "RD in 2017 (dummy)"
+{txt}
+{com}. label var EXP2015 "Export intensity in 2015"
+{txt}
+{com}. label var EXP2017 "Export intensity in 2017"
+{txt}
+{com}. label var TECH "Industry technology intensity"
+{txt}
+{com}. label define mFDI2016 0 "No FDI" 1 "FDI" 
+{txt}
+{com}. label value FDI2016 mFDI2016
+{txt}
+{com}. label define mFDI2016TYPE 0 "No FDI" 1 "Exports FDI" 2 "Tech. FDI" 3 "Domestic FDI"
+{txt}
+{com}. label value FDITYPE2016 mFDI2016TYPE
+{txt}
+{com}. label define mTECH 1 "Low-tech" 2 "Medium low" 3 "Medium high" 4 "High-tech"
+{txt}
+{com}. label value TECH mTECH
+{txt}
+{com}. 
+. *******************************************************************
+. * Task 2: descriptives ********************************************
+. *******************************************************************
+. 
+.  global T "TECH OWN PORT"
+{txt}
+{com}.  global Pre "logwages2015 TFP2015 logemp2015 EXP2015 DEBTS2015 RD2015"
+{txt}
+{com}.  global Post "logwages2017 TFP2017 logemp2017 EXP2017 RD2017"
+{txt}
+{com}.         
+. * Summary statistics of full dataset
+.         estpost sum logwages2015-RD2017
+
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:e(count)}{space 1}{space 1}{ralign 9:e(sum_w)}{space 1}{space 1}{ralign 9:e(mean)}{space 1}{space 1}{ralign 9:e(Var)}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}{hline 11}{hline 11}{hline 11}
+{space 0}{space 0}{ralign 12:logwages2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: 7.332918}}}{space 1}{space 1}{ralign 9:{res:{sf: 14.73685}}}{space 1}
+{space 0}{space 0}{ralign 12:TFP2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: 3.041338}}}{space 1}{space 1}{ralign 9:{res:{sf: 4.188589}}}{space 1}
+{space 0}{space 0}{ralign 12:logemp2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: 4.411473}}}{space 1}{space 1}{ralign 9:{res:{sf: 9.242801}}}{space 1}
+{space 0}{space 0}{ralign 12:DEBTS2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: .5040355}}}{space 1}{space 1}{ralign 9:{res:{sf: .1242747}}}{space 1}
+{space 0}{space 0}{ralign 12:EXP2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: .1593435}}}{space 1}{space 1}{ralign 9:{res:{sf: .0063704}}}{space 1}
+{space 0}{space 0}{ralign 12:RD2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: .1211693}}}{space 1}{space 1}{ralign 9:{res:{sf: .1064967}}}{space 1}
+{space 0}{space 0}{ralign 12:logwages2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: 5.010195}}}{space 1}{space 1}{ralign 9:{res:{sf: 9.503766}}}{space 1}
+{space 0}{space 0}{ralign 12:TFP2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: 3.656046}}}{space 1}{space 1}{ralign 9:{res:{sf: 4.229043}}}{space 1}
+{space 0}{space 0}{ralign 12:logemp2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: 5.030484}}}{space 1}{space 1}{ralign 9:{res:{sf:  9.57739}}}{space 1}
+{space 0}{space 0}{ralign 12:EXP2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: .2696827}}}{space 1}{space 1}{ralign 9:{res:{sf: .0117409}}}{space 1}
+{space 0}{space 0}{ralign 12:RD2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf:    11323}}}{space 1}{space 1}{ralign 9:{res:{sf: .4074009}}}{space 1}{space 1}{ralign 9:{res:{sf: .2414467}}}{space 1}
+
+{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:e(sd)}{space 1}{space 1}{ralign 9:e(min)}{space 1}{space 1}{ralign 9:e(max)}{space 1}{space 1}{ralign 9:e(sum)}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}{hline 11}{hline 11}{hline 11}
+{space 0}{space 0}{ralign 12:logwages2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 3.838861}}}{space 1}{space 1}{ralign 9:{res:{sf:-7.331795}}}{space 1}{space 1}{ralign 9:{res:{sf: 22.43151}}}{space 1}{space 1}{ralign 9:{res:{sf: 83030.63}}}{space 1}
+{space 0}{space 0}{ralign 12:TFP2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 2.046604}}}{space 1}{space 1}{ralign 9:{res:{sf:-5.359266}}}{space 1}{space 1}{ralign 9:{res:{sf: 11.35702}}}{space 1}{space 1}{ralign 9:{res:{sf: 34437.07}}}{space 1}
+{space 0}{space 0}{ralign 12:logemp2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 3.040198}}}{space 1}{space 1}{ralign 9:{res:{sf:-6.228763}}}{space 1}{space 1}{ralign 9:{res:{sf: 15.99303}}}{space 1}{space 1}{ralign 9:{res:{sf: 49951.11}}}{space 1}
+{space 0}{space 0}{ralign 12:DEBTS2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .3525262}}}{space 1}{space 1}{ralign 9:{res:{sf:-.1998464}}}{space 1}{space 1}{ralign 9:{res:{sf: 1.299778}}}{space 1}{space 1}{ralign 9:{res:{sf: 5707.194}}}{space 1}
+{space 0}{space 0}{ralign 12:EXP2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0798147}}}{space 1}{space 1}{ralign 9:{res:{sf: .0103205}}}{space 1}{space 1}{ralign 9:{res:{sf: .4831533}}}{space 1}{space 1}{ralign 9:{res:{sf: 1804.247}}}{space 1}
+{space 0}{space 0}{ralign 12:RD2015}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .3263383}}}{space 1}{space 1}{ralign 9:{res:{sf:        0}}}{space 1}{space 1}{ralign 9:{res:{sf:        1}}}{space 1}{space 1}{ralign 9:{res:{sf:     1372}}}{space 1}
+{space 0}{space 0}{ralign 12:logwages2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 3.082818}}}{space 1}{space 1}{ralign 9:{res:{sf:-6.185148}}}{space 1}{space 1}{ralign 9:{res:{sf: 17.04211}}}{space 1}{space 1}{ralign 9:{res:{sf: 56730.44}}}{space 1}
+{space 0}{space 0}{ralign 12:TFP2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 2.056464}}}{space 1}{space 1}{ralign 9:{res:{sf:-4.700881}}}{space 1}{space 1}{ralign 9:{res:{sf:  11.8114}}}{space 1}{space 1}{ralign 9:{res:{sf: 41397.41}}}{space 1}
+{space 0}{space 0}{ralign 12:logemp2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 3.094736}}}{space 1}{space 1}{ralign 9:{res:{sf:-6.217651}}}{space 1}{space 1}{ralign 9:{res:{sf: 16.38825}}}{space 1}{space 1}{ralign 9:{res:{sf: 56960.17}}}{space 1}
+{space 0}{space 0}{ralign 12:EXP2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .1083555}}}{space 1}{space 1}{ralign 9:{res:{sf: .0187976}}}{space 1}{space 1}{ralign 9:{res:{sf: .9501169}}}{space 1}{space 1}{ralign 9:{res:{sf: 3053.618}}}{space 1}
+{space 0}{space 0}{ralign 12:RD2017}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .4913723}}}{space 1}{space 1}{ralign 9:{res:{sf:        0}}}{space 1}{space 1}{ralign 9:{res:{sf:        1}}}{space 1}{space 1}{ralign 9:{res:{sf:     4613}}}{space 1}
+
+{com}.         esttab using "latex_code/figures_and_tables/sumstats.tex", replace cells("mean(fmt(3) label(Mean)) sd(fmt(3) label(Std. Dev.))  min(fmt(3) label(Min.)) max(fmt(3) label(Max.)) count(fmt(0) label(Obs.))") label nonumber noobs  
+{res}{txt}(note: file latex_code/figures_and_tables/sumstats.tex not found)
+{err}{p 0 4 2}
+file latex_code/figures_and_tables/sumstats.tex
+could not be opened
+{p_end}
+{txt}{search r(603), local:r(603);}
+
+end of do-file
+
+{search r(603), local:r(603);}
+
+{com}. do "C:\Users\linda\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}.         teffects ipw  (logemp2017 )(FDITYPE2016 c.($c) i.($cat) )
+
+{res}{txt}Iteration 0:{space 3}EE criterion = {res: 2.348e-15}  
+Iteration 1:{space 3}EE criterion = {res: 2.780e-29}  
+{res}
+{txt}Treatment-effects estimation{col 49}Number of obs {col 67}= {res}    11,323
+{txt:Estimator}{col 16}:{res: inverse-probability weights}
+{txt:Outcome model}{col 16}:{res: weighted mean}
+{txt:Treatment model}{col 16}:{res: (multinomial) logit}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}  logemp2017{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 1}FDITYPE2016 {c |}
+(Exports ..  {c |}
+{space 9}vs  {c |}
+{space 4}No FDI)  {c |}{col 14}{res}{space 2} 1.812829{col 26}{space 2} .0975684{col 37}{space 1}   18.58{col 46}{space 3}0.000{col 54}{space 4} 1.621598{col 67}{space 3} 2.004059
+{txt}{space 1}(Tech. FDI  {c |}
+{space 9}vs  {c |}
+{space 4}No FDI)  {c |}{col 14}{res}{space 2} 2.023347{col 26}{space 2} .0782445{col 37}{space 1}   25.86{col 46}{space 3}0.000{col 54}{space 4} 1.869991{col 67}{space 3} 2.176704
+{txt}(Domestic..  {c |}
+{space 9}vs  {c |}
+{space 4}No FDI)  {c |}{col 14}{res}{space 2} 1.940446{col 26}{space 2}  .072488{col 37}{space 1}   26.77{col 46}{space 3}0.000{col 54}{space 4} 1.798372{col 67}{space 3}  2.08252
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}POmean       {txt}{c |}
+{space 1}FDITYPE2016 {c |}
+{space 5}No FDI  {c |}{col 14}{res}{space 2} 4.265374{col 26}{space 2} .0370103{col 37}{space 1}  115.25{col 46}{space 3}0.000{col 54}{space 4} 4.192835{col 67}{space 3} 4.337913
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}.         tebalance summarize     
+{err}invalid syntax
+{txt}{search r(198), local:r(198);}
+
+end of do-file
+
+{search r(198), local:r(198);}
+
+{com}. do "C:\Users\linda\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}.         tebalance summarize     
+{err}invalid syntax
+{txt}{search r(198), local:r(198);}
+
+end of do-file
+
+{search r(198), local:r(198);}
+
+{com}. exit, clear
