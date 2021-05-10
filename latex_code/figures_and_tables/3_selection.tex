@@ -1,24 +1,29 @@
 \begin{table}[htbp]\centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\caption{Logit estimation results of FDI on pre-treatment observables }
-\label{selection_logit}
+\caption{Logit estimation results of FDI on pre-treatment observables \label{selection\_logit}}
 \begin{tabular}{l*{1}{cc}}
 \hline\hline
-                &\multicolumn{2}{c}{FDI in 2016}\\
+                &\multicolumn{2}{c}{(1)}\\
+                &\multicolumn{2}{c}{FDI/TREATMENT dummy in 2016}\\
                 &        b   &       se\\
 \hline
-log wages in 2015&  -0.0008   &  (0.008)\\
+FDI/TREATMENT dummy in 2016&            &         \\
+Wages in 2015 (logs)&  -0.0008   &  (0.008)\\
 Total factor productivity in 2015&  -0.0917***&  (0.016)\\
-log of employment in 2015&   0.1905***&  (0.011)\\
-EXPORT INTENSITY in 2015&  47.2347***&  (0.765)\\
- log of DEBTS in 2015&  -0.3426***&  (0.109)\\
-R\&D dummy in 2015=1&   0.2892***&  (0.097)\\
-Medium low-tech industries&  -2.1258***&  (0.104)\\
-Medium high-tech industries&  -5.0274***&  (0.112)\\
-High-tech industries&  -8.5163***&  (0.164)\\
+Employment in 2015 (logs)&   0.1905***&  (0.011)\\
+Export intensity in 2015&  47.2347***&  (0.765)\\
+Debt in 2015 (logs)&  -0.3426***&  (0.109)\\
+RD in 2015 (dummy)=0&   0.0000   &      (.)\\
+RD in 2015 (dummy)=1&   0.2892***&  (0.097)\\
+Low-tech        &   0.0000   &      (.)\\
+Medium low      &  -2.1258***&  (0.104)\\
+Medium high     &  -5.0274***&  (0.112)\\
+High-tech       &  -8.5163***&  (0.164)\\
+ Listed companies&   0.0000   &      (.)\\
  Subsidiaries   &   1.8301***&  (0.148)\\
  Independent    &   3.4707***&  (0.150)\\
  State          &   2.1772***&  (0.151)\\
+No ports within 500km&   0.0000   &      (.)\\
 Ports within 500km&  -3.0085***&  (0.087)\\
 Constant        &  -7.0707***&  (0.212)\\
 \hline
