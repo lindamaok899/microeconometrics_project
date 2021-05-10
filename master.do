@@ -275,6 +275,8 @@ label value TECH mTECH
 	}
 	teffects ipw (logemp2017)(FDITYPE2016 c.($c)#i.($cat) ) if o2==0
 	tebalance summarize	
+	estout r(table) using "latex_code/figures_and_tables/4_balance_ipw.tex", style(tex) replace ///
+	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
 	teffects overlap, ptlevel(1)
 
 	* aipw: estimates effects on the treatement and outcome models
@@ -284,7 +286,10 @@ label value TECH mTECH
 	}
 	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat)) if o3==0 
 	tebalance summarize
+	estout r(table) using "latex_code/figures_and_tables/4_balance_aipw.tex", style(tex) replace ///
+	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
 	teffects overlap, ptlevel(1)
+	graph export  "latex_code/figures_and_tables/4_overlap_aipw_typeFDI.pdf", replace
 	
 	
 	
