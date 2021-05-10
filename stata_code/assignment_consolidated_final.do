@@ -33,7 +33,7 @@ label value TECH mTECH
 	
 * Summary statistics of full dataset
 	estpost sum logwages2015-RD2017
-	esttab using "../tables/sumstats.tex", replace cells("mean(fmt(3) label(Mean)) sd(fmt(3) label(Std. Dev.))	min(fmt(3) label(Min.)) max(fmt(3) label(Max.)) count(fmt(0) label(Obs.))") label nonumber noobs  
+	esttab using "latex_code/figures_and_tables/sumstats.tex", replace cells("mean(fmt(3) label(Mean)) sd(fmt(3) label(Std. Dev.))	min(fmt(3) label(Min.)) max(fmt(3) label(Max.)) count(fmt(0) label(Obs.))") label nonumber noobs  
 	
 * Some additional statistics
 	tab TECH 
@@ -61,22 +61,22 @@ label value TECH mTECH
 	estadd matrix sd1 
 	estadd matrix count1 
 
-	esttab 	using "../tables/sumstats_bytreatment.tex", replace cells("mean0(fmt(3) label(Mean)) mean1(fmt(3) label(Mean)) b(label(Diff.) star) p(label(p-value))" ///
+	esttab 	using "latex_code/figures_and_tables/sumstats_bytreatment.tex", replace cells("mean0(fmt(3) label(Mean)) mean1(fmt(3) label(Mean)) b(label(Diff.) star) p(label(p-value))" ///
 	"sd0(label(SD) par fmt(3)) sd1(label(SD) par fmt(3))")  label collabels("FDI=0: Mean(SD)" "FDI=1: Mean(SD)" "Mean diff." "P-value") unstack nonumber 
 
 
 * Summary statistics by type of treatment
 	
 	estpost tabstat $Pre, by(FDITYPE2016) statistics(mean sd count) columns(statistics) nototal 
-	esttab using "../tables/sumstats_pre_bytreatmentgroup.tex", replace cells("mean(fmt(3) label(Mean))"  "sd(fmt(3) par label(SD))") label unstack nonumber 
+	esttab using "latex_code/figures_and_tables/sumstats_pre_bytreatmentgroup.tex", replace cells("mean(fmt(3) label(Mean))"  "sd(fmt(3) par label(SD))") label unstack nonumber 
 	*In main text
 				
 	estpost tabstat $Post, by(FDITYPE2016) statistics(mean sd count) columns(statistics) nototal 
-	esttab  using "../tables/sumstats_post_bytreatmentgroup.tex", replace cells("mean(fmt(3) label(Mean))"  "sd(fmt(3) par label(SD))") label unstack nonumber 
+	esttab  using "latex_code/figures_and_tables/sumstats_post_bytreatmentgroup.tex", replace cells("mean(fmt(3) label(Mean))"  "sd(fmt(3) par label(SD))") label unstack nonumber 
 	*In Appendix
 				
 	tab TECH FDI2016 , row
-	tabout FDI2016 `var' using "../tables/sum_stat_frequ_`var'_new.tex",  c(freq col)  ////
+	tabout FDI2016 `var' using "latex_code/figures_and_tables/sum_stat_frequ_`var'_new.tex",  c(freq col)  ////
 	f(0c 1) style(tex) font(italic) replace
 	}		
 			
@@ -84,13 +84,13 @@ label value TECH mTECH
 * Frequency Tables			
 	foreach var in $T {
 	tab `var' FDI2016 , col
-	tabout  `var' FDI2016 using "../tables/sum_stat_frequ_`var'_new.tex",  c(freq col)  ////
+	tabout  `var' FDI2016 using "latex_code/figures_and_tables/sum_stat_frequ_`var'_new.tex",  c(freq col)  ////
 	f(0c 1) style(tex) font(italic) replace
 	}
 	 
 	foreach var in $T {
 	tab `var' FDITYPE2016 , col
-	tabout  `var' FDITYPE2016 using "../tables/sum_stat_frequ_`var'_FDI_type.tex",  c(freq col)  ///
+	tabout  `var' FDITYPE2016 using "latex_code/figures_and_tables/sum_stat_frequ_`var'_FDI_type.tex",  c(freq col)  ///
 	f(0c 1) style(tex) font(italic) replace
 	}
 
