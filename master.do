@@ -2,8 +2,8 @@ clear all
 cap log close
 set matsize 11000
 
-log using take_home, replace
-use FDI_project.dta, clear
+log using stata_code/master_log, replace
+use stata_code/FDI_project.dta, clear
 
 * Adjust labels
 label var logwages2015 "Wages in 2015 (logs)"
@@ -68,23 +68,23 @@ label value TECH mTECH
 * Summary statistics by type of treatment
 	
 	estpost tabstat $Pre, by(FDITYPE2016) statistics(mean sd count) columns(statistics) nototal 
-	esttab using "latex_code/tables/sumstats_pre_bytreatmentgroup.tex", replace cells("mean(fmt(3) label(Mean))"  "sd(fmt(3) par label(SD))") label unstack nonumber 
+	esttab using "latex_code/figures_and_tables/sumstats_pre_bytreatmentgroup.tex", replace cells("mean(fmt(3) label(Mean))"  "sd(fmt(3) par label(SD))") label unstack nonumber 
 	*In main text
 				
 	estpost tabstat $Post, by(FDITYPE2016) statistics(mean sd count) columns(statistics) nototal 
-	esttab  using "latex_code/tables/sumstats_post_bytreatmentgroup.tex", replace cells("mean(fmt(3) label(Mean))"  "sd(fmt(3) par label(SD))") label unstack nonumber 
+	esttab  using "latex_code/figures_and_tables/sumstats_post_bytreatmentgroup.tex", replace cells("mean(fmt(3) label(Mean))"  "sd(fmt(3) par label(SD))") label unstack nonumber 
 	*In Appendix
 				
 	tab TECH FDI2016 , row
-	tabout FDI2016 `var' using "latex_code/tables/sum_stat_frequ_`var'_new.tex",  c(freq col)  ////
+	tabout FDI2016 `var' using "latex_code/figures_and_tables/sum_stat_frequ_`var'_new.tex",  c(freq col)  ////
 	f(0c 1) style(tex) font(italic) replace
-	}		
+	*}		
 			
 			
 * Frequency Tables			
 	foreach var in $T {
 	tab `var' FDI2016 , col
-	tabout  `var' FDI2016 using "latex_code/tables/sum_stat_frequ_`var'_new.tex",  c(freq col)  ////
+	tabout  `var' FDI2016 using "latex_code/figures_and_tables/sum_stat_frequ_`var'_new.tex",  c(freq col)  ////
 	f(0c 1) style(tex) font(italic) replace
 	}
 	 
@@ -105,7 +105,7 @@ label value TECH mTECH
 	graph bar (mean) RD2015 RD2017, over(FDITYPE2016, nolabel) name(bar_rd) title("R&D")
 	graph bar (mean) DEBTS2015, over(FDITYPE2016, nolabel) name(bar_debt) title("Debt")
 	grc1leg bar_wages bar_emp bar_tfp barexp bar_rd bar_debt, title("Pre- and post-treatment variables by treatment categories", size(small)) legendfrom(bar_wages)
-	graph export write-up/graphs/bar_pre_post.eps
+	graph export latex_code/figures_and_tables/bar_pre_post.eps, replace
 	graph drop _all
 	
 	
@@ -153,7 +153,9 @@ label value TECH mTECH
 	 		* overlap improves slightly, balance improves also. both still not convincing
 	 
 	 * psmatch with probit to estimate propensity score
+	 capture {
 	 teffects psmatch (logemp2017 )(FDI2016 c.($C)#i.($D) , probit ),  osample(o1)
+	 }
 	 teffects psmatch (logemp2017 )(FDI2016 c.($C)#i.($D) , probit ) if o1 == 0
 	 tebalance summarize
 	 estout r(table) using "latex_code/figures_and_tables/3_balance_intprobit1o1.tex", style(tex) replace ///
@@ -203,7 +205,6 @@ label value TECH mTECH
 	*RA
 	teffects ra (logemp2017 c.($c)#i.($cat) )(FDI2016)
 	eststo ate_emp_ra
-	tebalance summarize
 	 *the propensity scoring model is probably not correctly specified as seen with the high standard errors
 	
 	* ipw
@@ -269,23 +270,30 @@ label value TECH mTECH
 	tebalance summarize	
 	
 	** interactions
-	teffects ipw  (logemp2017 )(FDITYPE2016 c.($c)#i.($cat) ),  osample(o5)
-	teffects ipw (logemp2017)(FDITYPE2016 c.($c)#i.($cat) ) if o5==0
+	capture {
+	teffects ipw  (logemp2017 )(FDITYPE2016 c.($c)#i.($cat) ),  osample(o2)
+	}
+	teffects ipw (logemp2017)(FDITYPE2016 c.($c)#i.($cat) ) if o2==0
 	tebalance summarize	
 	teffects overlap, ptlevel(1)
 
 	* aipw: estimates effects on the treatement and outcome models
 	** interactions
-	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) , osample(o6)
-	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat)) if o6==0 
+	capture {
+	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) , osample(o3)
+	}
+	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat)) if o3==0 
 	tebalance summarize
 	teffects overlap, ptlevel(1)
 	
 	
 	
 	* Wages regression using AIPW
-	teffects aipw (logwages2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) , osample(o7)
-	teffects aipw (logwages2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) if o7==0 
+	capture {
+	teffects aipw (logwages2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) , osample(o4)
+	}
+	teffects aipw (logwages2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat) ) if o4==0 
 	tebalance summarize
+	
 	
  log close

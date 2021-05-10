@@ -100,7 +100,6 @@
 } def
 /Srect {
 	/sfill exch def
-	/sstroke exch def
 	yratio mul
 	/y1 exch def
 	xratio mul
@@ -110,12 +109,18 @@
 	xratio mul
 	/x0 exch def
 	newpath x0 y0 moveto x0 y1 lineto x1 y1 lineto x1 y0 lineto x0 y0 lineto closepath
-	sfill Sfill
-	sstroke Sstroke
+	sfill 1 eq {
+		Ssrgb setrgbcolor
+		gsave
+		fill
+		grestore
+	} if
+	Slw setlinewidth
+	Slrgb setrgbcolor
+	stroke
 } def
 /Sellipse {
 	/sfill exch def
-	/sstroke exch def
 	yratio mul
 	/yrad exch def
 	xratio mul
@@ -129,12 +134,18 @@
 	xrad yrad scale
 	0 0 1 0 360 arc
 	savematrix setmatrix
-	sfill Sfill
-	sstroke Sstroke
+	sfill 1 eq {
+		Ssrgb setrgbcolor
+		gsave
+		fill
+		grestore
+	} if
+	Slw setlinewidth
+	Slrgb setrgbcolor
+	stroke
 } def
 /Stri {
 	/sfill exch def
-	/sstroke exch def
 	xratio mul
 	/r exch def
 	yratio mul
@@ -153,8 +164,15 @@
 	xcen add
 	/xright exch def
 	newpath xcen ytop moveto xright ybot lineto xleft ybot lineto xcen ytop lineto closepath
-	sfill Sfill
-	sstroke Sstroke
+	sfill 1 eq {
+		Ssrgb setrgbcolor
+		gsave
+		fill
+		grestore
+	} if
+	Slw setlinewidth
+	Slrgb setrgbcolor
+	stroke
 } def
 /Soldtri {
 	/sfill exch def
@@ -188,7 +206,6 @@
 } def
 /Sdia {
 	/sfill exch def
-	/sstroke exch def
 	xratio mul
 	/r exch def
 	yratio mul
@@ -207,13 +224,19 @@
 	/x3 x def
 	y r add
 	/y3 exch def
-	newpath x0 y0 moveto x1 y1 lineto x2 y2 lineto x3 y3 lineto closepath
-	sfill Sfill
-	sstroke Sstroke
+	newpath x0 y0 moveto x1 y1 lineto x2 y2 lineto x3 y3 lineto x0 y0 lineto closepath
+	sfill 1 eq {
+		Ssrgb setrgbcolor
+		gsave
+		fill
+		grestore
+	} if
+	Slw setlinewidth
+	Slrgb setrgbcolor
+	stroke
 } def
 /Scc {
 	/sfill exch def
-	/sstroke exch def
 	xratio mul
 	/r0 exch def
 	yratio mul
@@ -221,12 +244,18 @@
 	xratio mul
 	/x0 exch def
 	x0 y0 r0 0 360 arc closepath
-	sfill Sfill
-	sstroke Sstroke
+	sfill 1 eq {
+		Ssrgb setrgbcolor
+		gsave
+		fill
+		grestore
+	} if
+	Slw setlinewidth
+	Slrgb setrgbcolor
+	stroke
 } def
 /Spie {
 	/sfill exch def
-	/salign exch def
 	/a1 exch def
 	/a0 exch def
 	xratio mul
@@ -235,40 +264,16 @@
 	/y exch def
 	xratio mul
 	/x exch def
-	/Pie {
-		x y moveto x y r a0 a1 arc closepath
-	} def
-	newpath Pie
-	sfill Sfill
+	newpath x y moveto x y r a0 a1 arc closepath
+	sfill 1 eq {
+		Ssrgb setrgbcolor
+		gsave
+		fill
+		grestore
+	} if
+	Slw setlinewidth
 	Slrgb setrgbcolor
-	salign 0 eq {
-		gsave
-		Slw 2 mul setlinewidth
-		clip
-		stroke
-		grestore
-	} if
-	salign 1 eq {
-		Slw setlinewidth
-		stroke
-	} if
-	salign 2 eq {
-		gsave
-		Slw 2 mul setlinewidth
-		strokepath
-		pathbbox
-		/ury exch def
-		/urx exch def
-		/lly exch def
-		/llx exch def
-		newpath llx lly moveto llx ury lineto urx ury lineto urx lly lineto closepath
-		Pie
-		eoclip
-		newpath Pie
-		stroke
-		grestore
-	} if
-	newpath
+	stroke
 } def
 /Splu {
 	xratio mul
@@ -335,80 +340,6 @@
 	/x exch def
 	x y PL
 } def
-/Sarr {
-	/sfill exch def
-	xratio mul
-	/r exch def
-	yratio mul
-	/y exch def
-	xratio mul
-	/x exch def
-	y r add
-	/ytop exch def
-	y r sub
-	/ybot exch def
-	gsave
-	Slrgb setrgbcolor
-	sfill 0 eq {
-		r 2 mul 3 div dup
-		x exch sub
-		/xleft exch def
-		x add
-		/xright exch def
-		newpath xleft y moveto x ytop lineto xright y lineto x ytop moveto x ybot lineto
-		Lcs
-		1 setlinejoin
-	} {
-		r 2 div dup
-		x exch sub
-		/xleft exch def
-		x add
-		/xright exch def
-		newpath xleft y moveto x ytop lineto xright y lineto x ytop closepath moveto x ybot lineto
-		gsave
-		fill
-		grestore
-	} ifelse
-	Slw setlinewidth
-	stroke
-	grestore
-} def
-/Spipe {
-	xratio mul
-	/r exch def
-	yratio mul
-	/y exch def
-	xratio mul
-	/x exch def
-	y r sub
-	/y0 exch def
-	y r add
-	/y1 exch def
-	x y0 M x y1 L
-} def
-/Sv {
-	xratio mul
-	/r exch def
-	yratio mul
-	/y0 exch def
-	xratio mul
-	/x0 exch def
-	/xcen x0 def
-	y0 r add
-	/ytop exch def
-	r 2 div
-	y0 exch sub
-	/ybot exch def
-	r 3 sqrt 2 div mul dup
-	xcen exch sub
-	/xleft exch def
-	xcen add
-	/xright exch def
-	newpath xleft ytop moveto xcen ybot lineto xright ytop lineto
-	Slw setlinewidth
-	Slrgb setrgbcolor
-	stroke
-} def
 /Lcs {
 	currentlinecap
 	1 setlinecap
@@ -422,43 +353,17 @@
 /Sep {
 	/sfill exch def
 	closepath
-	/salign exch def
+	sfill 1 eq  {
+		Ssrgb setrgbcolor
+		gsave
+		fill
+		grestore
+	} if
+	Slw setlinewidth
+	Slrgb setrgbcolor
 	Lcs
-	salign 0 eq {
-		sfill Sfill
-		gsave
-		Slw 2 mul setlinewidth
-		clip
-		Slrgb setrgbcolor
-		stroke
-		grestore
-	} if
-	salign 1 eq {
-		sfill Sfill
-		Slw setlinewidth
-		Slrgb setrgbcolor
-		stroke
-	} if
-	salign 2 eq {
-		gsave
-		Slw 2 mul setlinewidth
-		Slrgb setrgbcolor
-		stroke
-		grestore
-		sfill Sfill
-	} if
-	newpath
+	stroke
 	Lcr
-} def
-/Stransrot {
-	/anglep exch def
-	yratio mul
-	/y exch def
-	xratio mul
-	/x exch def
-	x y translate
-	anglep rotate
-	x neg y neg translate
 } def
 /cp {currentpoint} def 
 /M {moveto} def 
@@ -482,39 +387,18 @@
 /Slw 0.120 def
 0.918 0.949 0.953 setrgbcolor
 0 0 396.000 288.000 Sbgfill
-/Sfill {
-	/sfill exch def
-	sfill 1 eq {
-		Ssrgb setrgbcolor
-		gsave
-		fill
-		grestore
-	} if
-} def
-/Sstroke {
-	/sstroke exch def
-	sstroke 1 eq {
-		Slw setlinewidth
-		Slrgb setrgbcolor
-		stroke
-	} if
-	newpath
-} def
 /Slrgb {1.000 1.000 1.000} def
 /Strgb {1.000 1.000 1.000} def
 /Ssrgb {1.000 1.000 1.000} def
 /Ssrgb {0.918 0.949 0.953} def
 /Slw 0.576 def
 /Slrgb {0.918 0.949 0.953} def
-0 0 31999 23272 0 1 Srect
-23 23 31976 23249 1 0 Srect
+0 0 31999 23272 1 Srect
 /Slw 0.384 def
-512 12206 10837 21834 0 1 Srect
-528 12222 10821 21818 1 0 Srect
+512 12206 10837 21834 1 Srect
 /Ssrgb {1.000 1.000 1.000} def
 /Slrgb {1.000 1.000 1.000} def
-2078 13611 10294 20351 0 1 Srect
-2094 13627 10278 20335 1 0 Srect
+2078 13611 10294 20351 1 Srect
 /Slrgb {0.000 0.000 0.000} def
 /Strgb {0.000 0.000 0.000} def
 /Slw 0.576 def
@@ -543,37 +427,31 @@
 /Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 /Ssrgb {0.102 0.278 0.435} def
+/Slw 0.120 def
 /Slrgb {0.102 0.278 0.435} def
-2758 13611 3443 19443 0 1 Srect
-2774 13627 3427 19427 1 0 Srect
+2758 13611 3443 19443 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-3443 13611 4128 16919 0 1 Srect
-3459 13627 4112 16903 1 0 Srect
+3443 13611 4128 16919 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-4587 13611 5272 18904 0 1 Srect
-4603 13627 5256 18888 1 0 Srect
+4587 13611 5272 18904 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-5272 13611 5957 18286 0 1 Srect
-5288 13627 5941 18270 1 0 Srect
+5272 13611 5957 18286 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-6416 13611 7101 19038 0 1 Srect
-6432 13627 7085 19022 1 0 Srect
+6416 13611 7101 19038 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-7101 13611 7785 18426 0 1 Srect
-7117 13627 7769 18410 1 0 Srect
+7101 13611 7785 18426 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-8244 13611 8929 19147 0 1 Srect
-8260 13627 8913 19131 1 0 Srect
+8244 13611 8929 19147 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-8929 13611 9614 18373 0 1 Srect
-8945 13627 9598 18357 1 0 Srect
+8929 13611 9614 18373 1 Srect
+/Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 2078 13611 2078 20351 Sln
 2078 13611 1863 13611 Sln
@@ -695,12 +573,10 @@ dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 /Ssrgb {0.918 0.949 0.953} def
 /Slrgb {0.918 0.949 0.953} def
-10837 12206 21162 21834 0 1 Srect
-10853 12222 21146 21818 1 0 Srect
+10837 12206 21162 21834 1 Srect
 /Ssrgb {1.000 1.000 1.000} def
 /Slrgb {1.000 1.000 1.000} def
-12404 13611 20619 20351 0 1 Srect
-12420 13627 20603 20335 1 0 Srect
+12404 13611 20619 20351 1 Srect
 /Slrgb {0.000 0.000 0.000} def
 /Strgb {0.000 0.000 0.000} def
 /Slw 0.576 def
@@ -724,37 +600,31 @@ pop pop pop pop
 /Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 /Ssrgb {0.102 0.278 0.435} def
+/Slw 0.120 def
 /Slrgb {0.102 0.278 0.435} def
-13083 13611 13768 17322 0 1 Srect
-13099 13627 13752 17306 1 0 Srect
+13083 13611 13768 17322 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-13768 13611 14453 17814 0 1 Srect
-13784 13627 14437 17798 1 0 Srect
+13768 13611 14453 17814 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-14912 13611 15597 18808 0 1 Srect
-14928 13627 15581 18792 1 0 Srect
+14912 13611 15597 18808 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-15597 13611 16282 19601 0 1 Srect
-15613 13627 16266 19585 1 0 Srect
+15597 13611 16282 19601 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-16741 13611 17426 19010 0 1 Srect
-16757 13627 17410 18994 1 0 Srect
+16741 13611 17426 19010 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-17426 13611 18110 19808 0 1 Srect
-17442 13627 18094 19792 1 0 Srect
+17426 13611 18110 19808 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-18569 13611 19254 18941 0 1 Srect
-18585 13627 19238 18925 1 0 Srect
+18569 13611 19254 18941 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-19254 13611 19939 19726 0 1 Srect
-19270 13627 19923 19710 1 0 Srect
+19254 13611 19939 19726 1 Srect
+/Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 12404 13611 12404 20351 Sln
 12404 13611 12188 13611 Sln
@@ -864,12 +734,10 @@ dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 /Ssrgb {0.918 0.949 0.953} def
 /Slrgb {0.918 0.949 0.953} def
-21162 12206 31487 21834 0 1 Srect
-21178 12222 31471 21818 1 0 Srect
+21162 12206 31487 21834 1 Srect
 /Ssrgb {1.000 1.000 1.000} def
 /Slrgb {1.000 1.000 1.000} def
-22729 13611 30944 20351 0 1 Srect
-22745 13627 30928 20335 1 0 Srect
+22729 13611 30944 20351 1 Srect
 /Slrgb {0.000 0.000 0.000} def
 /Strgb {0.000 0.000 0.000} def
 /Slw 0.576 def
@@ -898,37 +766,31 @@ pop pop pop pop
 /Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 /Ssrgb {0.102 0.278 0.435} def
+/Slw 0.120 def
 /Slrgb {0.102 0.278 0.435} def
-23409 13611 24093 18545 0 1 Srect
-23425 13627 24077 18529 1 0 Srect
+23409 13611 24093 18545 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-24093 13611 24778 19317 0 1 Srect
-24109 13627 24762 19301 1 0 Srect
+24093 13611 24778 19317 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-25237 13611 25922 17866 0 1 Srect
-25253 13627 25906 17850 1 0 Srect
+25237 13611 25922 17866 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-25922 13611 26607 19108 0 1 Srect
-25938 13627 26591 19092 1 0 Srect
+25922 13611 26607 19108 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-27066 13611 27751 17886 0 1 Srect
-27082 13627 27735 17870 1 0 Srect
+27066 13611 27751 17886 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-27751 13611 28435 19100 0 1 Srect
-27767 13627 28419 19084 1 0 Srect
+27751 13611 28435 19100 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-28894 13611 29579 18112 0 1 Srect
-28910 13627 29563 18096 1 0 Srect
+28894 13611 29579 18112 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-29579 13611 30264 19348 0 1 Srect
-29595 13627 30248 19332 1 0 Srect
+29579 13611 30264 19348 1 Srect
+/Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 22729 13611 22729 20351 Sln
 22729 13611 22513 13611 Sln
@@ -1050,12 +912,10 @@ dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 /Ssrgb {0.918 0.949 0.953} def
 /Slrgb {0.918 0.949 0.953} def
-512 2577 10837 12206 0 1 Srect
-528 2593 10821 12190 1 0 Srect
+512 2577 10837 12206 1 Srect
 /Ssrgb {1.000 1.000 1.000} def
 /Slrgb {1.000 1.000 1.000} def
-2078 3982 10294 10722 0 1 Srect
-2094 3998 10278 10706 1 0 Srect
+2078 3982 10294 10722 1 Srect
 /Slrgb {0.000 0.000 0.000} def
 /Strgb {0.000 0.000 0.000} def
 /Slw 0.576 def
@@ -1079,37 +939,31 @@ pop pop pop pop
 /Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 /Ssrgb {0.102 0.278 0.435} def
+/Slw 0.120 def
 /Slrgb {0.102 0.278 0.435} def
-2758 3982 3443 6567 0 1 Srect
-2774 3998 3427 6551 1 0 Srect
+2758 3982 3443 6567 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-3443 3982 4128 8871 0 1 Srect
-3459 3998 4112 8855 1 0 Srect
+3443 3982 4128 8871 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-4587 3982 5272 7970 0 1 Srect
-4603 3998 5256 7954 1 0 Srect
+4587 3982 5272 7970 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-5272 3982 5957 9976 0 1 Srect
-5288 3998 5941 9960 1 0 Srect
+5272 3982 5957 9976 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-6416 3982 7101 7918 0 1 Srect
-6432 3998 7085 7902 1 0 Srect
+6416 3982 7101 7918 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-7101 3982 7785 9838 0 1 Srect
-7117 3998 7769 9822 1 0 Srect
+7101 3982 7785 9838 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-8244 3982 8929 8116 0 1 Srect
-8260 3998 8913 8100 1 0 Srect
+8244 3982 8929 8116 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-8929 3982 9614 10179 0 1 Srect
-8945 3998 9598 10163 1 0 Srect
+8929 3982 9614 10179 1 Srect
+/Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 2078 3982 2078 10722 Sln
 2078 3982 1863 3982 Sln
@@ -1219,12 +1073,10 @@ dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 /Ssrgb {0.918 0.949 0.953} def
 /Slrgb {0.918 0.949 0.953} def
-10837 2577 21162 12206 0 1 Srect
-10853 2593 21146 12190 1 0 Srect
+10837 2577 21162 12206 1 Srect
 /Ssrgb {1.000 1.000 1.000} def
 /Slrgb {1.000 1.000 1.000} def
-12404 3982 20619 10722 0 1 Srect
-12420 3998 20603 10706 1 0 Srect
+12404 3982 20619 10722 1 Srect
 /Slrgb {0.000 0.000 0.000} def
 /Strgb {0.000 0.000 0.000} def
 /Slw 0.576 def
@@ -1258,37 +1110,31 @@ pop pop pop pop
 /Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 /Ssrgb {0.102 0.278 0.435} def
+/Slw 0.120 def
 /Slrgb {0.102 0.278 0.435} def
-13083 3982 13768 5427 0 1 Srect
-13099 3998 13752 5411 1 0 Srect
+13083 3982 13768 5427 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-13768 3982 14453 8658 0 1 Srect
-13784 3998 14437 8642 1 0 Srect
+13768 3982 14453 8658 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-14912 3982 15597 4733 0 1 Srect
-14928 3998 15581 4717 1 0 Srect
+14912 3982 15597 4733 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-15597 3982 16282 9151 0 1 Srect
-15613 3998 16266 9135 1 0 Srect
+15597 3982 16282 9151 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-16741 3982 17426 5090 0 1 Srect
-16757 3998 17410 5074 1 0 Srect
+16741 3982 17426 5090 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-17426 3982 18110 9306 0 1 Srect
-17442 3998 18094 9290 1 0 Srect
+17426 3982 18110 9306 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
 /Slrgb {0.102 0.278 0.435} def
-18569 3982 19254 6353 0 1 Srect
-18585 3998 19238 6337 1 0 Srect
+18569 3982 19254 6353 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-19254 3982 19939 10063 0 1 Srect
-19270 3998 19923 10047 1 0 Srect
+19254 3982 19939 10063 1 Srect
+/Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 12404 3982 12404 10722 Sln
 12404 3982 12188 3982 Sln
@@ -1422,12 +1268,10 @@ dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 /Ssrgb {0.918 0.949 0.953} def
 /Slrgb {0.918 0.949 0.953} def
-21162 2577 31487 12206 0 1 Srect
-21178 2593 31471 12190 1 0 Srect
+21162 2577 31487 12206 1 Srect
 /Ssrgb {1.000 1.000 1.000} def
 /Slrgb {1.000 1.000 1.000} def
-23267 3982 30944 10722 0 1 Srect
-23283 3998 30928 10706 1 0 Srect
+23267 3982 30944 10722 1 Srect
 /Slrgb {0.000 0.000 0.000} def
 /Strgb {0.000 0.000 0.000} def
 /Slw 0.576 def
@@ -1461,15 +1305,13 @@ pop pop pop pop
 /Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 /Ssrgb {0.102 0.278 0.435} def
+/Slw 0.120 def
 /Slrgb {0.102 0.278 0.435} def
-24016 3982 25044 10179 0 1 Srect
-24032 3998 25028 10163 1 0 Srect
-25733 3982 26761 9896 0 1 Srect
-25749 3998 26745 9880 1 0 Srect
-27450 3982 28478 10098 0 1 Srect
-27466 3998 28462 10082 1 0 Srect
-29167 3982 30195 9864 0 1 Srect
-29183 3998 30179 9848 1 0 Srect
+24016 3982 25044 10179 1 Srect
+25733 3982 26761 9896 1 Srect
+27450 3982 28478 10098 1 Srect
+29167 3982 30195 9864 1 Srect
+/Slw 0.384 def
 /Slrgb {0.000 0.000 0.000} def
 23267 3982 23267 10722 Sln
 23267 3982 23052 3982 Sln
@@ -1625,16 +1467,14 @@ dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 /Ssrgb {1.000 1.000 1.000} def
 /Slw 0.576 def
-7379 791 24620 2297 0 1 Srect
-7402 814 24597 2274 1 0 Srect
+7379 791 24620 2297 1 Srect
 /Ssrgb {0.102 0.278 0.435} def
+/Slw 0.120 def
 /Slrgb {0.102 0.278 0.435} def
-7729 1140 10754 1948 0 1 Srect
-7752 1163 10731 1925 1 0 Srect
+7729 1140 10754 1948 1 Srect
 /Ssrgb {0.565 0.208 0.231} def
 /Slrgb {0.565 0.208 0.231} def
-16565 1140 19590 1948 0 1 Srect
-16588 1163 19567 1925 1 0 Srect
+16565 1140 19590 1948 1 Srect
 /Strgb {0.000 0.000 0.000} def
 11239 1261 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
