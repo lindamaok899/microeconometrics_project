@@ -2,7 +2,7 @@ clear all
 cap log close
 set matsize 11000
 
-log using stata_code/master_log, replace
+log using stata_code/master_log.log, replace
 use stata_code/FDI_project.dta, clear
 
 * Adjust labels
@@ -268,15 +268,18 @@ label value TECH mTECH
 	** no interactions
 	teffects ipw  (logemp2017 )(FDITYPE2016 c.($c) i.($cat) )
 	tebalance summarize	
+	estout r(table) using "latex_code/figures_and_tables/4_balance_ipw_linear.tex", style(tex) replace ///
+	substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
 	
 	** interactions
 	capture {
 	teffects ipw  (logemp2017 )(FDITYPE2016 c.($c)#i.($cat) ),  osample(o2)
 	}
 	teffects ipw (logemp2017)(FDITYPE2016 c.($c)#i.($cat) ) if o2==0
-	tebalance summarize	
-	estout r(table) using "latex_code/figures_and_tables/4_balance_ipw.tex", style(tex) replace ///
+	estout r(table) using "latex_code/figures_and_tables/4_balance_ipw_interactions.tex", style(tex) replace ///
 	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
+	tebalance summarize	
+
 	teffects overlap, ptlevel(1)
 
 	* aipw: estimates effects on the treatement and outcome models
@@ -286,8 +289,6 @@ label value TECH mTECH
 	}
 	teffects aipw (logemp2017 c.($c)#i.($cat) )(FDITYPE2016 c.($c)#i.($cat)) if o3==0 
 	tebalance summarize
-	estout r(table) using "latex_code/figures_and_tables/4_balance_aipw.tex", style(tex) replace ///
-	 substitute(_ \_) collabels("Diff:Raw" "Diff:Match" "Ratio:Raw" "Ratio:Match")
 	teffects overlap, ptlevel(1)
 	graph export  "latex_code/figures_and_tables/4_overlap_aipw_typeFDI.pdf", replace
 	
